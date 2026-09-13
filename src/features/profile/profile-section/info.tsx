@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import type { ProfileDetails } from "@/queries/profile/types";
+import type { ProfileDetails } from "@/queries/profile";
 
 export default function Information({
   profile,

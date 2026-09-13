@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import type { ProfileDetails } from "@/queries/profile/types";
+import type { ProfileDetails } from "@/queries/profile";
 import { cn } from "@/lib/utils";
 
 const USER_INFO_CONFIG = [

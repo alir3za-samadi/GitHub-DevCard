@@ -3,8 +3,7 @@ import { Card } from "@/components/base/card";
 import { Star, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-
-import { TrendingRepoItem, Language } from "@/queries/trending/types";
+import { TrendingRepoItem, Language } from "@/queries/trending";
 
 export default function Repo({
   repo,

@@ -13,7 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { TOP_LANGUAGES } from "@/queries/common/constants";
-import type { Language } from "@/queries/trending/types";
+import type { Language } from "@/queries/trending";
 
 export default function SortSection({
   currentLang,

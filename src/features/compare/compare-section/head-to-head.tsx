@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import type { ProfileDetails } from "@/queries/profile/types";
+import type { ProfileDetails } from "@/queries/profile";
 
 const COLORS = {
   userA: { bg: "bg-foreground/40" },

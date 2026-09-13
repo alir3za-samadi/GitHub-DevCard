@@ -3,7 +3,7 @@
 import Repo from "@/features/trending/trending-section/repo";
 import TrendingReposPaginationControls from "@/features/trending/trending-section/trending-repos-pagination-controls";
 import { useSearchParams } from "next/navigation";
-import type { TrendingRepos, Language } from "@/queries/trending/types";
+import type { TrendingRepos, Language } from "@/queries/trending";
 
 const ITEMS_PER_PAGE = 5;
 

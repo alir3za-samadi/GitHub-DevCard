@@ -2,7 +2,7 @@ import Repo from "@/features/profile/repos-section/repo";
 import InfoSection from "@/features/profile/profile-section/info-section";
 import GenerateCard from "@/components/ui/generate-card";
 import DetailCards from "@/features/profile/profile-section/detail-cards";
-import type { ProfileDetails, ProfileRepoItem } from "@/queries/profile/types";
+import type { ProfileDetails, ProfileRepoItem } from "@/queries/profile";
 
 export default function ProfileSection({
   profile,

@@ -1,7 +1,7 @@
 import Info from "@/features/profile/profile-section/info";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
-import type { ProfileDetails } from "@/queries/profile/types";
+import type { ProfileDetails } from "@/queries/profile";
 export default function InformationSection({
   profile,
   className,

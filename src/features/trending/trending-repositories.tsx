@@ -7,7 +7,7 @@ import GenerateCard from "@/components/ui/generate-card";
 import TrendingRepositoriesLoading from "@/features/trending/trending-repositories-loading";
 
 import { useTrending } from "@/queries/trending";
-import type { Language } from "@/queries/trending/types";
+import type { Language } from "@/queries/trending";
 
 export default function TrendingRepositories({
   currentLang,

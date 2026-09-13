@@ -5,8 +5,7 @@ import {
   TooltipContent,
 } from "@/components/base/tooltip";
 import { formatDate } from "@/lib/utils";
-import { TOP_LANGUAGES } from "@/queries/common/constants";
-import type { ProfileDetails } from "@/queries/profile/types";
+import type { ProfileDetails } from "@/queries/profile";
 
 const COLORS = [
   "bg-indigo-500",

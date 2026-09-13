@@ -1,61 +1,51 @@
-import { fetchGithubUser, fetchGithubRepos } from "@/lib/github";
-import { collctedStars } from "@/lib/utils";
+import {
+  fetchProfileDetails,
+  fetchProfileRepos,
+  formatRepos,
+} from "@/queries/profile";
 import { NextResponse } from "next/server";
-import type { GithubUserProfileResponse } from "@/lib/types";
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ username: string }> },
-): Promise<NextResponse<GithubUserProfileResponse>> {
-  const username = (await params).username;
+) {
+  try {
+    const { username } = await params;
 
-  if (!username) {
-    return NextResponse.json(
-      { message: "Username is required" },
-      { status: 400 },
-    );
-  }
-
-  const [userData, reposData] = await Promise.all([
-    fetchGithubUser(username),
-    fetchGithubRepos(username),
-  ]);
-
-  if ("message" in userData) {
-    const message = userData.message;
-
-    if (message === "USER_NOT_FOUND") {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
-
-    if (message === "API_ERROR" || message === "RATE_LIMIT_EXCEEDED") {
+    if (!username) {
       return NextResponse.json(
-        { message: "GitHub API rate limit exceeded or error occurred" },
-        { status: 429 },
+        { message: "Username is required" },
+        { status: 400 },
       );
     }
 
+    const [userData, reposData] = await Promise.all([
+      fetchProfileDetails(username),
+      fetchProfileRepos(username),
+    ]);
+
+    if (!userData) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
+    const formattedRepos = reposData ? formatRepos(reposData) : [];
+    const totalStars = formattedRepos.reduce(
+      (acc, repo) => acc + repo.stargazersCount,
+      0,
+    );
+
+    return NextResponse.json({
+      username: userData.login,
+      followers: userData.followers,
+      public_repos: userData.public_repos,
+      avatar_url: userData.avatar_url,
+      login: userData.login,
+      totalStars,
+    });
+  } catch (error: any) {
     return NextResponse.json(
-      { message: "Failed to fetch GitHub data" },
+      { message: error.message || "Failed to fetch GitHub data" },
       { status: 500 },
     );
   }
-
-  if ("message" in reposData) {
-    return NextResponse.json(
-      { message: "Failed to fetch GitHub data" },
-      { status: 500 },
-    );
-  }
-
-  const totalStars = collctedStars(reposData);
-
-  return NextResponse.json({
-    username: userData.login,
-    followers: userData.followers,
-    public_repos: userData.public_repos,
-    avatar_url: userData.avatar_url,
-    login: userData.login,
-    totalStars,
-  });
 }
