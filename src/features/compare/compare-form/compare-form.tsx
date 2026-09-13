@@ -113,6 +113,7 @@ export default function CompareForm({
                     <Link
                       href={`/compare?usernameA=${usernameA}&usernameB=${usernameB}`}
                       className="text-foreground"
+                      scroll={false}
                     />
                   }
                 >
