@@ -1,6 +1,6 @@
-# GitHub DevCard
+# Github DevCard
 
-> Search any GitHub username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
+> Search any Github username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
@@ -10,7 +10,6 @@
 ![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
-> If the link doesn't load in your region, try opening it with a VPN enabled.
 
 ## Demo
 
@@ -20,27 +19,27 @@ _Search a username → view the generated profile page → export it as a downlo
 
 ## Features
 
-- 🔍 **Search any GitHub username** and jump straight to a full profile view
+- 🔍 **Search any Github username** and jump straight to a full profile view
 - 📊 **Profile stats** — followers, public repo count, total stars collected across all repos, top languages breakdown
 - ⭐ **Highlighted repo** — automatically surfaces the user's most-starred (or most recently updated) repository
 - 🖼️ **Exportable dev card** — renders the profile as a styled card and downloads it as a PNG, client-side, with no server round-trip
-- ⚖️ **Compare mode** — put two GitHub users head-to-head
+- ⚖️ **Compare mode** — put two Github users head-to-head
 - 📈 **Trending repos** — browse trending repositories filtered by language and time window
 - 🔎 **Dynamic per-page SEO** — profile, compare, and trending pages each build their own `<title>`/description at request time via `generateMetadata`
 - 🌓 **Polished, responsive UI** — built with shadcn/ui + Base UI + Tailwind CSS v4, dark theme by default
 
 ## Tech Stack
 
-| Layer | Choice |
-|---|---|
-| Framework | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions) |
-| Language | TypeScript (strict mode) |
+| Layer                   | Choice                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)    |
+| Language                | TypeScript (strict mode)                                                            |
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
-| Styling / UI | Tailwind CSS v4, shadcn/ui, Base UI |
-| Forms & validation | react-hook-form + zod |
-| Card export | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download) |
-| Data source | [GitHub REST API](https://docs.github.com/en/rest) |
-| Deployment | Vercel |
+| Styling / UI            | Tailwind CSS v4, shadcn/ui, Base UI                                                 |
+| Forms & validation      | react-hook-form + zod                                                               |
+| Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
+| Data source             | [Github REST API](https://docs.github.com/en/rest)                                  |
+| Deployment              | Vercel                                                                              |
 
 ## Why this architecture
 
@@ -52,15 +51,15 @@ Code is organized under `src/features/<feature>` (`profile`, `compare`, `trendin
 
 ### Server Actions + TanStack React Query for data fetching
 
-The functions that actually call the GitHub API (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) are marked `"use server"`, so the fetch logic — and the optional `GITHUB_TOKEN` — never ships to the client bundle. Each feature then wraps those server functions in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
+The functions that actually call the Github API (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) are marked `"use server"`, so the fetch logic — and the optional `GITHUB_TOKEN` — never ships to the client bundle. Each feature then wraps those server functions in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
 
-- **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
+- **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a Github call.
 - **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
-- A profile page that needs four separate GitHub calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
+- A profile page that needs four separate Github calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
 
 ### Standalone `/api/github/...` routes
 
-`GET /api/github/profile/[username]` and `GET /api/github/trending` still exist as plain JSON endpoints, but the app's own pages no longer call them — they're kept as a public, framework-agnostic surface for the same GitHub stats (usable from a script, another app, or a future integration) rather than something the UI itself depends on.
+`GET /api/github/profile/[username]` and `GET /api/github/trending` still exist as plain JSON endpoints, but the app's own pages no longer call them — they're kept as a public, framework-agnostic surface for the same Github stats (usable from a script, another app, or a future integration) rather than something the UI itself depends on.
 
 ### `generateMetadata` instead of a static `metadata` export
 
@@ -78,7 +77,7 @@ cd Github-DevCard
 # 2. Install dependencies (pnpm is what this repo is locked to)
 pnpm install
 
-# 3. (Optional) add a GitHub token — see Environment Variables below
+# 3. (Optional) add a Github token — see Environment Variables below
 cp .env.example .env.local
 
 # 4. Run the dev server
@@ -89,9 +88,9 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|---|---|---|
-| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| Variable       | Required | Description                                                                                                                                                                                                                                                                                                                   |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GITHUB_TOKEN` | No       | A [Github personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use Github's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 

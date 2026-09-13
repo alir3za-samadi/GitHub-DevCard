@@ -16,6 +16,7 @@ export function useProfile(username: string) {
   const profileDetailsQuery = useQuery({
     queryKey: profileKeys.details(username),
     queryFn: () => fetchProfileDetails(username),
+    throwOnError: true,
     enabled: Boolean(username && username.trim().length > 0),
     staleTime: 1000 * 60 * 5,
     retry: 1,
@@ -86,6 +87,7 @@ export function useProfileDetails(username: string) {
   return useQuery({
     queryKey: profileKeys.details(username),
     queryFn: () => fetchProfileDetails(username),
+    throwOnError: true,
     staleTime: 1000 * 60 * 5,
     retry: 1,
     refetchOnWindowFocus: false,
@@ -96,6 +98,7 @@ export function useProfileRepos(username: string) {
   return useQuery({
     queryKey: profileKeys.repos(username),
     queryFn: () => fetchProfileRepos(username),
+    throwOnError: true,
     staleTime: 1000 * 60 * 5,
     retry: 1,
     refetchOnWindowFocus: false,
@@ -106,6 +109,7 @@ export function useProfileGivenStarred(username: string) {
   return useQuery({
     queryKey: profileKeys.givenStarred(username),
     queryFn: () => fetchProfileGivenStarredCount(username),
+    throwOnError: true,
     staleTime: 1000 * 60 * 5,
     retry: 1,
     refetchOnWindowFocus: false,
@@ -116,6 +120,7 @@ export function useProfileFeaturedRepo(username: string) {
   return useQuery({
     queryKey: profileKeys.featuredRepo(username),
     queryFn: () => fetchProfileFeaturedRepo(username),
+    throwOnError: true,
     staleTime: 1000 * 60 * 5,
     retry: 1,
     refetchOnWindowFocus: false,

@@ -23,9 +23,9 @@ export default function UserProfile({ username }: { username: string }) {
     return <UserProfileLoading />;
   }
 
-  if (isError) {
-    throw error;
-  }
+  // if (isError) {
+  //   throw error;
+  // }
 
   if (isNotFound || !profile) {
     notFound();

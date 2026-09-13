@@ -1,17 +1,45 @@
+"use client";
+
 import Link from "next/link";
-import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/base/button";
+import { Card, CardContent } from "@/components/base/card";
+import { UserX, Search } from "lucide-react";
 
-export default function NotFound() {
+export default function UserNotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-100 gap-4 text-center mx-auto">
-      <AlertCircle className="w-12 h-12 text-destructive" />
-      <h2 className="text-xl font-bold">User Not Found 404!</h2>
-      <p className="text-muted-foreground text-sm">
-        The requested username is not available on GitHub.
-      </p>
+    <div className="container flex min-h w-full flex-col items-center justify-center my-10 p-4 mx-auto">
+      <Card className="w-full max-w-lg border-border/50 bg-background/60 shadow-2xl backdrop-blur-xl">
+        <CardContent className="flex flex-col items-center p-8 text-center sm:p-12">
+          {/* Animated Icon Container with Destructive theme */}
+          <div className="relative mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-destructive/10 text-destructive shadow-inner">
+            <UserX className="h-10 w-10" />
+            <Search className="absolute -bottom-1 -right-1 h-6 w-6 text-muted-foreground" />
+          </div>
 
-      <Button render={<Link href="/" />}>Search another Username</Button>
+          <span className="text-xs font-bold tracking-widest text-destructive uppercase">
+            Error 404
+          </span>
+          <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            User Not Found
+          </h1>
+
+          <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+            The requested username is not available on GitHub or has been
+            changed.
+          </p>
+
+          <div className="mt-6 flex w-full justify-center">
+            <Button
+              nativeButton={false}
+              render={<Link href="/" />}
+              className="w-full gap-2 sm:w-auto"
+            >
+              <Search className="h-4 w-4" />
+              Search Another Username
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

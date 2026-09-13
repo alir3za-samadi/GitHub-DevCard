@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/base/skeleton";
 import { Separator } from "@/components/base/separator";
 import { Card, CardContent } from "@/components/base/card";
 
-export default function Loading() {
+export default function UserProfileLoading() {
   return (
     <div className="w-full mx-auto space-y-6">
       <ProfileSectionSkeleton />
@@ -104,8 +104,8 @@ function RepoSectionSkeleton() {
 function RepoCardSkeleton() {
   return (
     <Card className="w-full">
-      <CardContent className="px-4 flex flex-col h-21 justify-between py-4">
-        <Skeleton className="h-5 w-3/4" />
+      <CardContent className="px-4 flex flex-col h-21 justify-between py-4 gap-4">
+        <Skeleton className="h-3 w-3/4 py-2 " />
         <div className="flex flex-col gap-2">
           <Skeleton className="h-3 w-1/2" />
           <Skeleton className="h-3 w-1/3" />
