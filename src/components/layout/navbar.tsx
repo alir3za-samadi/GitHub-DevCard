@@ -50,14 +50,14 @@ export default function Navbar() {
                   DevCard
                 </SheetTitle>
               </SheetHeader>
-              <nav className="flex flex-col gap-4 mt-6">
+              <nav className="flex flex-col">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   return (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="flex items-center gap-3 text-base text-muted-foreground hover:text-foreground transition-colors py-2 pl-4 border-b border-border/40"
+                      className="flex items-center gap-3 text-base text-muted-foreground hover:text-foreground transition-colors py-4 pl-4 border-b border-border/40"
                     >
                       <Icon className="w-5 h-5" />
                       {item.label}

@@ -88,6 +88,14 @@ function RepoSectionSkeleton() {
         </div>
 
         <Skeleton className="h-4 w-48 mt-2" />
+
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-6 w-20 rounded-md" />
+          <Skeleton className="h-6 w-8 rounded-md" />
+          <Skeleton className="h-6 w-8 rounded-md" />
+          <Skeleton className="h-6 w-8 rounded-md" />
+          <Skeleton className="h-6 w-20 rounded-md" />
+        </div>
       </div>
     </div>
   );
