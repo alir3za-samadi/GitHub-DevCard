@@ -5,15 +5,14 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/base/hover-card";
-
-import type { GithubRepo } from "@/lib/types";
 import { ExternalLink } from "lucide-react";
+import type { ProfileRepoItem } from "@/queries/profile/types";
 
 export default function Repo({
   repo,
   className,
 }: {
-  repo: GithubRepo;
+  repo: ProfileRepoItem;
   className?: string;
 }) {
   return (
@@ -27,7 +26,7 @@ export default function Repo({
               <h3 className="text-md">
                 <a
                   key={repo.id}
-                  href={repo.html_url}
+                  href={repo.htmlUrl}
                   target="_blank"
                   className="flex items-center gap-2 truncate w-full group "
                 >
@@ -41,7 +40,7 @@ export default function Repo({
             <p>{repo.description || "The repositorie has no description"}</p>
 
             <span className="mt-1 text-xs text-muted-foreground">
-              {formatDate(repo.updated_at)}
+              {formatDate(repo.updatedAt)}
             </span>
           </HoverCardContent>
         </HoverCard>
@@ -49,11 +48,11 @@ export default function Repo({
         <div className="flex flex-col gap-2">
           <p className="text-[12px] font-mono">
             {repo.language || "Unknown"} ·{" "}
-            <span className="text-amber-400">{repo.stargazers_count}★</span>
+            <span className="text-amber-400">{repo.stargazersCount}★</span>
           </p>
 
           <span className="mt-1 text-xs text-muted-foreground">
-            {formatDate(repo.updated_at)}
+            {formatDate(repo.updatedAt)}
           </span>
         </div>
       </CardContent>

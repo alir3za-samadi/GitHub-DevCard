@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import ReposSort from "@/features/profile/repos-sort";
-import ReposExport from "@/features/profile/repos-export";
-import ReposList from "@/features/profile/repos-list";
-import ReposPaginationControls from "@/features/profile/repos-pagination-controls";
+import ReposSort from "@/features/profile/repos-section/repos-sort";
+import ReposExport from "@/features/profile/repos-section/repos-export";
+import ReposList from "@/features/profile/repos-section/repos-list";
+import ReposPaginationControls from "@/features/profile/repos-section/repos-pagination-controls";
 import { sortRepos } from "@/lib/utils";
-import type { GithubRepos, SortOptionsValue } from "@/lib/types";
+import type { SortOptionsValue } from "@/lib/types";
+import type { ProfileRepos } from "@/queries/profile/types";
 
 const ITEMS_PER_PAGE = 9;
 
-export default function ReposSection({ repos }: { repos: GithubRepos }) {
+export default function ReposSection({ repos }: { repos: ProfileRepos }) {
   const [sortBy, setSortBy] = useState<SortOptionsValue>("updated");
   const [currentPage, setCurrentPage] = useState<number>(1);
 

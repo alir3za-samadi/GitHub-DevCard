@@ -40,7 +40,11 @@ export default function SearchSection() {
               }}
             />
           </Field>
-          <Button className="p-5 w-full md:w-auto" type="submit">
+          <Button
+            className="p-5 w-full md:w-auto"
+            type="submit"
+            disabled={username.length <= 0}
+          >
             Search
           </Button>
         </div>

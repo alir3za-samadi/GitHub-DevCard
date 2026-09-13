@@ -1,8 +1,4 @@
-export const SORT_OPTIONS = [
-  { label: "Recently Updated", value: "updated" },
-  { label: "Most Stars", value: "stars" },
-  { label: "Name", value: "name" },
-] as const;
+export const GITHUB_API_BASE_URL = "https://api.github.com";
 
 export const TOP_LANGUAGES = [
   {

@@ -1,35 +1,35 @@
 import { cn } from "@/lib/utils";
-import { UserProfileData } from "@/lib/types";
-
-const STATS_CONFIG = [
-  {
-    key: "followers",
-    label: "Followers",
-    getValue: (data: UserProfileData) => data.followers,
-  },
-  {
-    key: "repos",
-    label: "Repositories",
-    getValue: (data: UserProfileData) => data.public_repos,
-  },
-  {
-    key: "total_stars",
-    label: "Total Stars",
-    getValue: (data: UserProfileData) => data.totalStars,
-  },
-] as const;
+import type { ProfileDetails } from "@/queries/profile/types";
 
 const COLORS = {
   userA: { bg: "bg-foreground/40" },
   userB: { bg: "bg-muted-foreground/20" },
 } as const;
 
+const STATS_CONFIG = [
+  {
+    key: "followers",
+    label: "Followers",
+    getValue: (data: ProfileDetails) => data.followers,
+  },
+  {
+    key: "repos",
+    label: "Repositories",
+    getValue: (data: ProfileDetails) => data.publicRepos,
+  },
+  {
+    key: "total_stars",
+    label: "Total Stars",
+    getValue: (data: ProfileDetails) => data.totalStars,
+  },
+] as const;
+
 export default function HeadToHead({
   dataA,
   dataB,
 }: {
-  dataA: UserProfileData;
-  dataB: UserProfileData;
+  dataA: ProfileDetails;
+  dataB: ProfileDetails;
 }) {
   return (
     <div className="p-6 border rounded-xl bg-card space-y-6">

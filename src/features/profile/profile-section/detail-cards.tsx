@@ -4,12 +4,9 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/base/tooltip";
-import { formatDate, languageCount, collctedStars } from "@/lib/utils";
-import type {
-  GithubUser,
-  GithubRepos,
-  GithubStarredResponse,
-} from "@/lib/types";
+import { formatDate } from "@/lib/utils";
+import { TOP_LANGUAGES } from "@/queries/common/constants";
+import type { ProfileDetails } from "@/queries/profile/types";
 
 const COLORS = [
   "bg-indigo-500",
@@ -20,29 +17,25 @@ const COLORS = [
 ] as const;
 
 export default function DetailCards({
-  repos,
-  userData,
-  userGivenStarred,
+  profile,
+  givenStarredCount,
 }: {
-  repos: GithubRepos;
-  userData: GithubUser;
-  userGivenStarred: GithubStarredResponse;
+  profile: ProfileDetails;
+  givenStarredCount: number;
 }) {
-  const starredRepos = Array.isArray(userGivenStarred) ? userGivenStarred : [];
-  const totalCollctedStars = collctedStars(repos);
-  const topLanguages = languageCount(repos);
   const detailCards = [
-    { label: "Repos", value: userData.public_repos },
-    { label: "Followers", value: userData.followers },
+    { label: "Repos", value: profile.publicRepos },
+    { label: "Followers", value: profile.followers },
     {
       label: "Stars given",
-      value: starredRepos.length >= 99 ? "99+" : starredRepos.length.toString(),
+      value: givenStarredCount.toString(),
     },
     {
       label: "Total stars",
-      value: totalCollctedStars.toLocaleString(),
+      value: profile.totalStars,
     },
   ];
+  const topLanguages = profile.topLanguages;
 
   return (
     <div className="space-y-3">
@@ -117,14 +110,14 @@ export default function DetailCards({
               <span>
                 Joined GitHub:{" "}
                 <span className="text-foreground">
-                  {formatDate(userData.created_at)}
+                  {formatDate(profile.createdAt)}
                 </span>
               </span>
 
               <span>
                 Live In:{" "}
                 <span className="text-foreground">
-                  {userData.location || "Unknown Location"}
+                  {profile.location || "Unknown Location"}
                 </span>
               </span>
             </p>

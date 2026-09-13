@@ -1,15 +1,7 @@
 import PageHeader from "@/components/ui/page-header";
-import ReposSection from "@/features/profile/repos-section";
-import ProfileSection from "@/features/profile/profile-section";
-import { Separator } from "@/components/base/separator";
+import UserProfile from "@/features/profile/user-profile";
 import { notFound } from "next/navigation";
-import {
-  fetchGithubUser,
-  fetchGithubRepos,
-  fetchGithubUserGivenStarred,
-  fetchGithubUserMostStarredRepo,
-} from "@/lib/github";
-import type { GithubRepo } from "@/lib/types";
+import { useProfile } from "@/queries/profile";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -30,40 +22,17 @@ export async function generateMetadata({
   };
 }
 
-export default async function UserProfile({
+export default async function Profile({
   params,
 }: {
   params: Promise<{ username: string }>;
 }) {
   const username = (await params).username;
-  const [userData, reposData, userGivenStarred, mostUserStarredRepoData] =
-    await Promise.all([
-      fetchGithubUser(username),
-      fetchGithubRepos(username),
-      fetchGithubUserGivenStarred(username),
-      fetchGithubUserMostStarredRepo(username),
-    ]);
-
-  if ("message" in userData) {
-    if (userData.message === "USER_NOT_FOUND") notFound();
-    throw new Error(userData.message || "FAILED_TO_FETCH_DATA");
-  }
-
-  const repos: GithubRepo[] = Array.isArray(reposData) ? reposData : [];
 
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">
-      <PageHeader title={`Profile of ${userData.login}`} />
-
-      <ProfileSection
-        userData={userData}
-        repos={repos}
-        userGivenStarred={userGivenStarred}
-        mostUserStarredRepoData={mostUserStarredRepoData}
-      />
-
-      <Separator />
-      <ReposSection repos={repos} />
+      <PageHeader title={`Profile of ${username}`} />
+      <UserProfile username={username} />
     </div>
   );
 }

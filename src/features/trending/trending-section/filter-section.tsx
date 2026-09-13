@@ -12,14 +12,12 @@ import {
 } from "@/components/base/select";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { TOP_LANGUAGES } from "@/lib/constants";
-import type { Language, Languages } from "@/lib/types";
+import { TOP_LANGUAGES } from "@/queries/common/constants";
+import type { Language } from "@/queries/trending/types";
 
 export default function SortSection({
-  languages,
   currentLang,
 }: {
-  languages: Languages;
   currentLang: Language;
 }) {
   const router = useRouter();
@@ -27,7 +25,7 @@ export default function SortSection({
   return (
     <>
       <div className="hidden w-2/3 md:flex md:flex-wrap items-center gap-2">
-        {languages.map((lang) => {
+        {TOP_LANGUAGES.map((lang) => {
           const isActive = lang.value === currentLang.value;
           return (
             <Button

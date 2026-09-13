@@ -1,12 +1,5 @@
 import PageHeader from "@/components/ui/page-header";
-import CompareForm from "@/features/compare/compare-form";
-import UserInfo from "@/features/compare/user-info";
-import HeadToHead from "@/features/compare/head-to-head";
-import GenerateCard from "@/components/ui/generate-card";
-import { Separator } from "@/components/base/separator";
-import { Swords } from "lucide-react";
-import { getUser } from "@/lib/github";
-import type { UserProfileData } from "@/lib/types";
+import CompareUsers from "@/features/compare/compare-users";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -37,66 +30,18 @@ export async function generateMetadata({
 export default async function ComparePage({
   searchParams,
 }: {
-  searchParams: Promise<{ userA?: string; userB?: string }>;
+  searchParams: Promise<{ usernameA?: string; usernameB?: string }>;
 }) {
-  const { userA = "", userB = "" } = await searchParams;
-
-  let dataA: UserProfileData | null = null;
-  let dataB: UserProfileData | null = null;
-
-  if (userA && userB) {
-    [dataA, dataB] = await Promise.all([getUser(userA), getUser(userB)]);
-  }
-
+  const { usernameA = "", usernameB = "" } = await searchParams;
   const pageTitle =
-    dataA && dataB
-      ? `Compare ${dataA.login} vs ${dataB.login}`
+    usernameA && usernameB
+      ? `Compare ${usernameA} vs ${usernameB}`
       : "Compare GitHub Profiles";
 
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">
       <PageHeader title={pageTitle} />
-
-      <CompareForm
-        userA={userA}
-        userB={userB}
-        errorA={userA && !dataA ? `User "${userA}" not found` : null}
-        errorB={userB && !dataB ? `User "${userB}" not found` : null}
-      />
-
-      {dataA && dataB && (
-        <>
-          <Separator />
-
-          <div className="flex justify-center">
-            <GenerateCard triggerClassName="w-full text-sm">
-              <div className="flex flex-col gap-4 md:flex-row">
-                <UserInfo userProfileData={dataA} />
-                <Swords
-                  className="text-muted-foreground shrink-0 mx-auto md:my-auto"
-                  size={18}
-                  aria-hidden="true"
-                />
-                <UserInfo userProfileData={dataB} />
-              </div>
-
-              <HeadToHead dataA={dataA} dataB={dataB} />
-            </GenerateCard>
-          </div>
-
-          <div className="flex flex-col gap-4 md:flex-row">
-            <UserInfo userProfileData={dataA} />
-            <Swords
-              className="text-muted-foreground shrink-0 mx-auto md:my-auto"
-              size={18}
-              aria-hidden="true"
-            />
-            <UserInfo userProfileData={dataB} />
-          </div>
-
-          <HeadToHead dataA={dataA} dataB={dataB} />
-        </>
-      )}
+      <CompareUsers usernameA={usernameA} usernameB={usernameB} />
     </div>
   );
 }

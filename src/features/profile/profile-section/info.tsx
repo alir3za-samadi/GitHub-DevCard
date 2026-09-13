@@ -1,19 +1,19 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import type { GithubUser } from "@/lib/types";
+import type { ProfileDetails } from "@/queries/profile/types";
 
 export default function Information({
-  userData,
+  profile,
   className,
 }: {
-  userData: GithubUser;
+  profile: ProfileDetails;
   className?: string;
 }) {
   return (
     <div className={cn("flex items-center gap-4", className)}>
       <Image
-        src={userData.avatar_url}
-        alt={`${userData.login}-avatar`}
+        src={profile.avatarUrl}
+        alt={`${profile.username}-avatar`}
         width={56}
         height={56}
         className="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-border bg-foreground"
@@ -21,10 +21,10 @@ export default function Information({
 
       <div className="flex flex-col">
         <h1 className="text-[17px] font-semibold text-foreground leading-tight">
-          {userData.name}
+          {profile.name}
         </h1>
         <p className="text-xs text-muted-foreground mt-1">
-          {userData.location || "Unknown Location"}
+          {profile.location || "Unknown Location"}
         </p>
       </div>
     </div>

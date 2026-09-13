@@ -1,12 +1,13 @@
 import { Button } from "@/components/base/button";
 import { useParams } from "next/navigation";
-import type { GithubRepos, SortOptionsValue } from "@/lib/types";
+import type { SortOptionsValue } from "@/lib/types";
+import type { ProfileRepos } from "@/queries/profile/types";
 
 export default function ReposExport({
   repos,
   sortBy,
 }: {
-  repos: GithubRepos;
+  repos: ProfileRepos;
   sortBy: SortOptionsValue;
 }) {
   const params = useParams();

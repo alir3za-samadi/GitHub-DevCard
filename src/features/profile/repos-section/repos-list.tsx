@@ -1,6 +1,6 @@
-import Repo from "@/features/profile/repo";
-import type { GithubRepos } from "@/lib/types";
+import Repo from "@/features/profile/repos-section/repo";
 import type { ReactNode } from "react";
+import type { ProfileRepos } from "@/queries/profile/types";
 
 export default function ReposList({
   repos,
@@ -9,7 +9,7 @@ export default function ReposList({
   totalItems,
   children,
 }: {
-  repos: GithubRepos;
+  repos: ProfileRepos;
   startItem: number;
   endItem: number;
   totalItems: number;

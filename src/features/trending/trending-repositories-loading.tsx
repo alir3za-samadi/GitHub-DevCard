@@ -1,0 +1,45 @@
+import { Skeleton } from "@/components/base/skeleton";
+import { Card } from "@/components/base/card";
+
+export default function TrendingReposPaginationControls() {
+  return (
+    <div className="w-full mx-auto space-y-6">
+      <ReposSectionSkeleton />
+    </div>
+  );
+}
+
+function ReposSectionSkeleton() {
+  return (
+    <div className="flex flex-col items-center gap-4 w-full">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Card
+          key={i}
+          className="w-full p-4 flex items-start justify-between gap-4"
+        >
+          <div className="space-y-3 flex-1 min-w-0">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-14 h-14 rounded-full shrink-0" />
+              <Skeleton className="h-5 w-48" />
+            </div>
+            <Skeleton className="h-4 w-full max-w-lg" />
+          </div>
+
+          <div className="flex flex-col md:flex-row items-end md:items-center gap-2 md:gap-4 shrink-0">
+            <Skeleton className="h-5 w-16 rounded-full" />
+            <Skeleton className="h-5 w-12" />
+          </div>
+        </Card>
+      ))}
+
+      <Skeleton className="h-4 w-52 my-1" />
+
+      <div className="flex items-center gap-2">
+        <Skeleton className="h-9 w-24 rounded-md" />
+        <Skeleton className="h-9 w-9 rounded-md" />
+        <Skeleton className="h-9 w-9 rounded-md" />
+        <Skeleton className="h-9 w-24 rounded-md" />
+      </div>
+    </div>
+  );
+}
