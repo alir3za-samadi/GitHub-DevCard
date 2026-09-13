@@ -1,14 +1,16 @@
-# Github DevCard
+# GitHub DevCard
 
-> Search any Github username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
+> Search any GitHub username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
+![TanStack Query](https://img.shields.io/badge/TanStack%20Query-v5-FF4154?logo=reactquery&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
+> If the link doesn't load in your region, try opening it with a VPN enabled.
 
 ## Demo
 
@@ -18,62 +20,53 @@ _Search a username → view the generated profile page → export it as a downlo
 
 ## Features
 
-- 🔍 **Search any Github username** and jump straight to a full profile view
+- 🔍 **Search any GitHub username** and jump straight to a full profile view
 - 📊 **Profile stats** — followers, public repo count, total stars collected across all repos, top languages breakdown
 - ⭐ **Highlighted repo** — automatically surfaces the user's most-starred (or most recently updated) repository
 - 🖼️ **Exportable dev card** — renders the profile as a styled card and downloads it as a PNG, client-side, with no server round-trip
-- ⚖️ **Compare mode** — put two Github users head-to-head
+- ⚖️ **Compare mode** — put two GitHub users head-to-head
 - 📈 **Trending repos** — browse trending repositories filtered by language and time window
-- 🔎 **Dynamic SEO on every page** — `/profile/[username]`, `/compare`, and `/trending` each build their own `<title>`/description at request time via `generateMetadata`, so titles, search results, and link previews always reflect what's actually being viewed
-- 🖼️ **Personalized social preview cards** — each of those three pages ships its own `next/og`-generated Open Graph image (the username, the two usernames being compared, or the selected language, rendered into a branded card), so sharing a link on Twitter/X, LinkedIn, or Discord shows a real preview instead of a generic screenshot
-- 🌓 **Polished, responsive UI** — built with shadcn/ui + Tailwind CSS v4, dark theme by default
+- 🔎 **Dynamic per-page SEO** — profile, compare, and trending pages each build their own `<title>`/description at request time via `generateMetadata`
+- 🌓 **Polished, responsive UI** — built with shadcn/ui + Base UI + Tailwind CSS v4, dark theme by default
 
 ## Tech Stack
 
 | Layer | Choice |
 |---|---|
-| Framework | [Next.js 16](https://nextjs.org) (App Router, Server Components) |
+| Framework | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions) |
 | Language | TypeScript (strict mode) |
+| Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
 | Styling / UI | Tailwind CSS v4, shadcn/ui, Base UI |
 | Forms & validation | react-hook-form + zod |
 | Card export | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download) |
-| Data source | [Github REST API](https://docs.github.com/en/rest) |
+| Data source | [GitHub REST API](https://docs.github.com/en/rest) |
 | Deployment | Vercel |
 
 ## Why this architecture
 
 A few deliberate decisions worth calling out, since they're easy to miss just skimming the file tree:
 
-### A dedicated API route (`/api/github/...`), separate from the pages
+### Feature-based folder structure
 
-`GET /api/github/profile/[username]` and `GET /api/github/trending` are standalone JSON endpoints, and the `/compare` and `/trending` pages call them over HTTP (via `NEXT_PUBLIC_BASE_URL`) instead of importing the Github-fetching functions directly. Keeping the Github-fetching logic behind an API route means:
+Code is organized under `src/features/<feature>` (`profile`, `compare`, `trending`, `home`) rather than one flat `components/` folder, with cross-cutting data logic split into its own `src/queries/<feature>` layer (API calls, React Query hooks, cache keys, formatters). Each feature owns its UI and its data-fetching hooks together, which keeps related code colocated as the project grows instead of scattering it across generic `components/ui` and `lib/` folders.
 
-- **Rate-limit handling lives in one place.** Github's REST API allows only 60 unauthenticated requests/hour per IP (5,000/hour with a token). The route normalizes Github's various failure states (404, 429, 422, network errors) into a single, predictable JSON error shape instead of leaking raw Github errors to every consumer.
-- **The response is a stable, reusable contract.** Any page, client component, or future public integration that needs "stats for user X" hits the same endpoint instead of duplicating fetch logic.
+### Server Actions + TanStack React Query for data fetching
 
-### Caching via Next.js's fetch cache (ISR-style revalidation)
+The functions that actually call the GitHub API (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) are marked `"use server"`, so the fetch logic — and the optional `GITHUB_TOKEN` — never ships to the client bundle. Each feature then wraps those server functions in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
 
-Every Github call goes through `fetch(url, { next: { revalidate: 3600 } })`. Because Github's rate limit is tight and per-IP, re-fetching the same profile on every request would burn through it fast. Time-based revalidation means:
+- **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
+- **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
+- A profile page that needs four separate GitHub calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
 
-- The first request for a given username hits Github and caches the result.
-- Any request within the next hour reuses the cached data — no Github call, no rate-limit cost.
-- After an hour, the data is treated as stale and refreshed automatically on the next request.
+### Standalone `/api/github/...` routes
 
-This gives most of the benefit of static generation (fast, cached responses) while still keeping profile data reasonably fresh — a good fit for data that changes slowly (follower counts, repo lists) but shouldn't be frozen forever like a fully static page.
+`GET /api/github/profile/[username]` and `GET /api/github/trending` still exist as plain JSON endpoints, but the app's own pages no longer call them — they're kept as a public, framework-agnostic surface for the same GitHub stats (usable from a script, another app, or a future integration) rather than something the UI itself depends on.
 
 ### `generateMetadata` instead of a static `metadata` export
 
-`/profile/[username]`, `/compare`, and `/trending` all use the async `generateMetadata` function rather than a static `export const metadata`, because the content of each of those pages depends on the URL: which username was searched, which two users are being compared, or which language is selected. A static export can't see any of that — `generateMetadata` runs per-request with access to `params`/`searchParams`, so the `<title>` and description in the page's `<head>` (and therefore browser tabs, search results, and link previews) actually describe what's being viewed instead of one generic title reused everywhere.
+`/profile/[username]`, `/compare`, and `/trending` all use the async `generateMetadata` function rather than a static `export const metadata`, because the content of each page depends on the URL: which username was searched, which two users are being compared, or which language is selected. A static export can't see any of that — `generateMetadata` runs per-request with access to `params`/`searchParams`, so the `<title>` and description actually describe what's being viewed instead of one generic title reused everywhere.
 
-### `next/og` for personalized social preview images
-
-Each of those same three routes also ships its own `opengraph-image.tsx` using Next.js's built-in [`next/og`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image) file convention — generated on the fly at the edge, with no separate image-hosting or screenshot service involved:
-
-- `/profile/[username]` renders a card with that username
-- `/compare?userA=...&userB=...` renders a "X vs Y" head-to-head card
-- `/trending?lang=...` renders a card naming the selected language
-
-This is what makes a shared link render as an actual branded image (instead of a bare URL) when pasted into Twitter/X, LinkedIn, or Discord.
+> Currently this covers text metadata only (title, description, Open Graph/Twitter tags) — there's no `next/og` image generation in this version, so shared links show a text preview rather than a custom card image.
 
 ## Getting Started
 
@@ -85,7 +78,7 @@ cd Github-DevCard
 # 2. Install dependencies (pnpm is what this repo is locked to)
 pnpm install
 
-# 3. Set up environment variables — see below
+# 3. (Optional) add a GitHub token — see Environment Variables below
 cp .env.example .env.local
 
 # 4. Run the dev server
@@ -98,13 +91,11 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 | Variable | Required | Description |
 |---|---|---|
-| `NEXT_PUBLIC_BASE_URL` | **Yes** | The base URL the app is running on (e.g. `http://localhost:3000` locally, or your deployed domain in production). The `/compare` and `/trending` pages call the app's own `/api/github/...` routes over HTTP, so this needs to point at wherever the app itself is reachable. |
-| `GITHUB_TOKEN` | No | A [Github personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use Github's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 
 ```env
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
 GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
