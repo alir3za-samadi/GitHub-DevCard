@@ -10,15 +10,51 @@
 ![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
-
 > If the link doesn't load in your region, try opening it with a VPN enabled.
 
 ## Demo
 
-![DevCard demo](./docs/demo.gif)
+<div align="center">
+  <img src="./docs/demo.gif" width="800" alt="Full flow: search a username, view the profile, export the card"/>
+</div>
 
+<br/>
 
-_Search a username → view the generated profile page → export it as a downloadable card image._
+### Home Page
+
+<table>
+<tr>
+<td width="50%"><img src="./docs/home-page.png" width="100%"/><p align="center"><sub>Default theme</sub></p></td>
+<td width="50%"><img src="./docs/home-page-light.png" width="100%"/><p align="center"><sub>Light theme</sub></p></td>
+</tr>
+</table>
+
+### Profile Page
+
+<table>
+<tr>
+<td width="50%"><img src="./docs/profile-page.png" width="100%"/><p align="center"><sub>Profile view</sub></p></td>
+<td width="50%"><img src="./docs/profile-page-generate-card.png" width="100%"/><p align="center"><sub>Generated card export</sub></p></td>
+</tr>
+</table>
+
+### Compare Page
+
+<table>
+<tr>
+<td width="50%"><img src="./docs/compare-page.png" width="100%"/><p align="center"><sub>Head-to-head comparison</sub></p></td>
+<td width="50%"><img src="./docs/compare-page-generate-card.png" width="100%"/><p align="center"><sub>Generated card export</sub></p></td>
+</tr>
+</table>
+
+### Trending Page
+
+<table>
+<tr>
+<td width="50%"><img src="./docs/trending-page.png" width="100%"/><p align="center"><sub>Trending repositories</sub></p></td>
+<td width="50%"><img src="./docs/trending-page-generate-card.png" width="100%"/><p align="center"><sub>Generated card export</sub></p></td>
+</tr>
+</table>
 
 ## Features
 
@@ -35,17 +71,17 @@ _Search a username → view the generated profile page → export it as a downlo
 
 ## Tech Stack
 
-| Layer                   | Choice                                                                              |
-| ----------------------- | ----------------------------------------------------------------------------------- |
-| Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)    |
-| Language                | TypeScript (strict mode)                                                            |
+| Layer | Choice |
+|---|---|
+| Framework | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions) |
+| Language | TypeScript (strict mode) |
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
-| Styling / UI            | Tailwind CSS v4, shadcn/ui, Base UI                                                 |
-| Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)       |
-| Forms & validation      | react-hook-form + zod                                                               |
-| Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
-| Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                  |
-| Deployment              | Vercel                                                                              |
+| Styling / UI | Tailwind CSS v4, shadcn/ui, Base UI |
+| Theming | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System) |
+| Forms & validation | react-hook-form + zod |
+| Card export | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download) |
+| Data source | [GitHub REST API](https://docs.github.com/en/rest) |
+| Deployment | Vercel |
 
 ## Why this architecture
 
@@ -94,9 +130,9 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable       | Required | Description                                                                                                                                                                                                                                                                                                                   |
-| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GITHUB_TOKEN` | No       | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| Variable | Required | Description |
+|---|---|---|
+| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 
