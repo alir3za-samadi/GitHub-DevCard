@@ -55,7 +55,7 @@
 ### 📈 Trending Page
 
 <p align="center">
-  <img src="./docs/trending-page-new.png" width="49%" alt="Trending Repositories" />
+  <img src="./docs/trending-page.png" width="49%" alt="Trending Repositories" />
   <img src="./docs/trending-page-generate-card.png" width="49%" alt="Generated Trending Card" />
 </p>
 
