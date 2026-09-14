@@ -1,28 +1,16 @@
-import { Code2, GitCompare, TrendingUp, Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/base/sheet";
+import MobileNav from "@/components/layout/mobile-nav";
+import { Logo } from "@/components/ui/logo";
+import { NAV_ITEMS } from "@/lib/constants";
 import Link from "next/link";
 
-import Logo from "@/components/ui/logo";
-
 export default function Navbar() {
-  const navItems = [
-    { href: "/compare", label: "Compare", icon: GitCompare },
-    { href: "/trending", label: "Trending", icon: TrendingUp },
-  ];
-
   return (
     <header className="border-b border-border bg-background/70 backdrop-blur sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Logo />
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          {navItems.map((item) => {
+          {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             return (
               <Link
@@ -38,7 +26,8 @@ export default function Navbar() {
         </nav>
 
         <div className="md:hidden">
-          <Sheet>
+          <MobileNav />
+          {/* <Sheet>
             <SheetTrigger aria-label="Open Menu" render={<button />}>
               <Menu className="w-5 h-5" />
             </SheetTrigger>
@@ -65,7 +54,7 @@ export default function Navbar() {
                 })}
               </nav>
             </SheetContent>
-          </Sheet>
+          </Sheet> */}
         </div>
       </div>
     </header>
