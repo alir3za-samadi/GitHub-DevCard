@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="flex justify-center border-t border-border h-16 mt-auto">
       <div className="w-full max-w-6xl mx-auto px-4 grid grid-cols-3 items-center text-xs ">
         <div className="flex justify-start items-center gap-2">
-          <div className="w-11 h-11" />
+          <div className="w-0 h-0 md:w-11 md:h-11" />
           <LogoText className="text-muted-foreground" />
         </div>
 
