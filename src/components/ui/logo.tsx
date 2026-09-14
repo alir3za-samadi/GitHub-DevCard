@@ -48,9 +48,7 @@ export function LogoText({
   hasLink?: boolean;
 }) {
   const textElement = (
-    <span className={cn("text-lg font-bold text-white", className)}>
-      DevCard
-    </span>
+    <span className={cn("text-lg font-bold", className)}>DevCard</span>
   );
 
   return hasLink ? <Link href="/">{textElement}</Link> : textElement;

@@ -11,6 +11,8 @@
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
 
+> If the link doesn't load in your region, try opening it with a VPN enabled.
+
 ## Demo
 
 ![DevCard demo](./docs/demo.gif)
@@ -25,9 +27,10 @@ _Search a username → view the generated profile page → export it as a downlo
 - 🖼️ **Exportable dev card** — renders the profile as a styled card and downloads it as a PNG, client-side, with no server round-trip
 - ⚖️ **Compare mode** — put two GitHub users head-to-head
 - 📈 **Trending repos** — browse trending repositories filtered by language and time window
+- 🌓 **Light / Dark / System theme toggle** — persisted across visits, with no flash of the wrong theme on initial load
+- 📱 **Responsive navbar** — dedicated mobile menu alongside the desktop nav
 - 🔎 **Dynamic per-page SEO** — profile, compare, and trending pages each build their own `<title>`/description at request time via `generateMetadata`
-- 🌓 **Light / Dark / System theme toggle** — built with `next-themes`, with no flash of the wrong theme on initial load
-- 🎨 **Polished, responsive UI** — built with shadcn/ui + Base UI + Tailwind CSS v4
+- 🎨 **Polished, responsive UI** — built with shadcn/ui + Base UI on top of Tailwind CSS v4
 
 ## Tech Stack
 
@@ -37,7 +40,7 @@ _Search a username → view the generated profile page → export it as a downlo
 | Language                | TypeScript (strict mode)                                                            |
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
 | Styling / UI            | Tailwind CSS v4, shadcn/ui, Base UI                                                 |
-| Theming                 | `next-themes` (Light / Dark / System)                                               |
+| Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)       |
 | Forms & validation      | react-hook-form + zod                                                               |
 | Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
 | Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                  |
