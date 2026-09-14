@@ -8,16 +8,6 @@ import {
   RawTrendingReposResponse,
 } from "@/queries/trending";
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
-const headers: RequestInit["headers"] = {
-  Accept: "application/vnd.github.v3+json",
-};
-
-if (GITHUB_TOKEN) {
-  headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
-}
-
 const ENDPOINTS = {
   TRENDING_REPOS: (language: string, daysAgo: number) => {
     const dateQuery = getDaysAge(daysAgo);
@@ -26,6 +16,19 @@ const ENDPOINTS = {
     return `${GITHUB_API_BASE_URL}/search/repositories?q=${encodedQuery}&sort=stars&order=desc`;
   },
 };
+
+function getHeaders(): RequestInit["headers"] {
+  const token = process.env.GITHUB_TOKEN;
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github.v3+json",
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  return headers;
+}
 
 export async function fetchTrendingRepos(
   language: string,
@@ -42,7 +45,7 @@ export async function fetchTrendingRepos(
   const res = await fetch(
     ENDPOINTS.TRENDING_REPOS(formattedLanguage, daysAgo),
     {
-      headers,
+      headers: getHeaders(),
     },
   );
 

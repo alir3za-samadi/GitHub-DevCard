@@ -6,16 +6,6 @@ import type {
   RawProfileGivenStarredCount,
 } from "@/queries/profile";
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
-const headers: RequestInit["headers"] = {
-  Accept: "application/vnd.github.v3+json",
-};
-
-if (GITHUB_TOKEN) {
-  headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
-}
-
 const ENDPOINTS = {
   PROFILE: (username: string) => `${GITHUB_API_BASE_URL}/users/${username}`,
   REPOSITORIES: (username: string) =>
@@ -26,13 +16,26 @@ const ENDPOINTS = {
     `${GITHUB_API_BASE_URL}/search/repositories?q=user:${username}&sort=${sort}&order=desc&per_page=1`,
 };
 
+function getHeaders(): RequestInit["headers"] {
+  const token = process.env.GITHUB_TOKEN;
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github.v3+json",
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  return headers;
+}
+
 export async function fetchProfileDetails(
   username: string,
 ): Promise<RawProfileDetails | null> {
   const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
 
   const res = await fetch(ENDPOINTS.PROFILE(formattedUsername), {
-    headers,
+    headers: getHeaders(),
   });
 
   if (res.status === 404) return null;
@@ -50,7 +53,7 @@ export async function fetchProfileRepos(
   const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
 
   const res = await fetch(ENDPOINTS.REPOSITORIES(formattedUsername), {
-    headers,
+    headers: getHeaders(),
   });
 
   if (res.status === 404) return null;
@@ -68,7 +71,7 @@ export async function fetchProfileGivenStarredCount(
   const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
 
   const res = await fetch(ENDPOINTS.USER_STARRED(formattedUsername), {
-    headers,
+    headers: getHeaders(),
   });
 
   if (res.status === 404) return null;
@@ -90,7 +93,7 @@ export async function fetchProfileFeaturedRepo(
   const starredRes = await fetch(
     ENDPOINTS.USER_SEARCH_REPOS(formattedUsername, "stars"),
     {
-      headers,
+      headers: getHeaders(),
     },
   );
 
@@ -113,7 +116,7 @@ export async function fetchProfileFeaturedRepo(
   const updatedRes = await fetch(
     ENDPOINTS.USER_SEARCH_REPOS(formattedUsername, "updated"),
     {
-      headers,
+      headers: getHeaders(),
     },
   );
 
