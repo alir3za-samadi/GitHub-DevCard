@@ -17,6 +17,7 @@
 
 ![DevCard demo](./docs/demo.gif)
 
+
 _Search a username → view the generated profile page → export it as a downloadable card image._
 
 ## Features
