@@ -8,6 +8,8 @@ import {
 } from "@/components/base/sheet";
 import Link from "next/link";
 
+import Logo from "@/components/ui/logo";
+
 export default function Navbar() {
   const navItems = [
     { href: "/compare", label: "Compare", icon: GitCompare },
@@ -17,10 +19,7 @@ export default function Navbar() {
   return (
     <header className="border-b border-border bg-background/70 backdrop-blur sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Code2 className="w-6 h-6" />
-          <span>DevCard</span>
-        </Link>
+        <Logo />
 
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navItems.map((item) => {
