@@ -26,4 +26,13 @@ export const TOP_LANGUAGES = [
     value: "go",
     color: "bg-cyan-400/20 text-cyan-300 border-cyan-500/30",
   },
+  {
+    label: "C",
+    value: "c",
+    color: "bg-gray-400/20 text-gray-300 border-gray-500/30",
+  },
 ] as const;
+
+export const VALID_LANGUAGES = TOP_LANGUAGES.map((lang) => lang.value).join(
+  ", ",
+);

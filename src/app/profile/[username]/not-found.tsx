@@ -5,18 +5,16 @@ import { Button } from "@/components/base/button";
 import { Card, CardContent } from "@/components/base/card";
 import { UserX, Search } from "lucide-react";
 
-export default function UserNotFound() {
+export default function NotFound() {
   return (
     <div className="container flex min-h w-full flex-col items-center justify-center my-10 p-4 mx-auto">
       <Card className="w-full max-w-lg border-border/50 bg-background/60 shadow-2xl backdrop-blur-xl">
         <CardContent className="flex flex-col items-center p-8 text-center sm:p-12">
-          {/* Animated Icon Container with Destructive theme */}
-          <div className="relative mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-destructive/10 text-destructive shadow-inner">
+          <div className="relative mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner">
             <UserX className="h-10 w-10" />
-            <Search className="absolute -bottom-1 -right-1 h-6 w-6 text-muted-foreground" />
           </div>
 
-          <span className="text-xs font-bold tracking-widest text-destructive uppercase">
+          <span className="text-xs font-bold tracking-widest uppercase">
             Error 404
           </span>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">

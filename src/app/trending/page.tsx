@@ -1,7 +1,8 @@
 import PageHeader from "@/components/ui/page-header";
 import TrendingRepositories from "@/features/trending/trending-repositories";
-
-import { TOP_LANGUAGES } from "@/lib/constants";
+import { TOP_LANGUAGES } from "@/queries/common/constants";
+import { isValidLanguage } from "@/queries/trending";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -14,7 +15,7 @@ export async function generateMetadata({
   const currentLang =
     TOP_LANGUAGES.find((l) => l.value === lang) || TOP_LANGUAGES[0];
 
-  const title = `Trending ${currentLang.label} Github Repositories | DevCard`;
+  const title = `Trending ${currentLang.label} GitHub Repositories | DevCard`;
   const description = `Explore top trending ${currentLang.label} repositories on GitHub today. Filter by programming language and discover popular projects with DevCard.`;
 
   return {
@@ -31,11 +32,18 @@ export default async function TrendingPage({
   searchParams: Promise<{ lang?: string }>;
 }) {
   const { lang } = await searchParams;
+  const formattedLanguage = lang?.trim().toLowerCase();
 
-  const targetLangValue = lang || "javascript";
+  if (
+    formattedLanguage &&
+    !isValidLanguage(formattedLanguage.trim().toLocaleLowerCase())
+  ) {
+    notFound();
+  }
 
   const currentLang =
-    TOP_LANGUAGES.find((l) => l.value === targetLangValue) || TOP_LANGUAGES[0];
+    TOP_LANGUAGES.find((l) => l.value === formattedLanguage) ||
+    TOP_LANGUAGES[0];
 
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">

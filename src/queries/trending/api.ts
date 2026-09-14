@@ -1,6 +1,12 @@
-import { GITHUB_API_BASE_URL } from "@/queries/common/constants";
-import { getDaysAge } from "@/queries/trending/utils";
-import { RawTrendingReposResponse } from "@/queries/trending/types";
+import {
+  GITHUB_API_BASE_URL,
+  VALID_LANGUAGES,
+} from "@/queries/common/constants";
+import {
+  getDaysAge,
+  isValidLanguage,
+  RawTrendingReposResponse,
+} from "@/queries/trending";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
@@ -25,9 +31,20 @@ export async function fetchTrendingRepos(
   language: string,
   daysAgo: number = 30,
 ): Promise<RawTrendingReposResponse | null> {
-  const res = await fetch(ENDPOINTS.TRENDING_REPOS(language, daysAgo), {
-    headers,
-  });
+  const formattedLanguage = language.trim().toLowerCase();
+
+  if (formattedLanguage && !isValidLanguage(formattedLanguage)) {
+    throw new Error(
+      `Invalid language '${language}'. Allowed values: ${VALID_LANGUAGES}`,
+    );
+  }
+
+  const res = await fetch(
+    ENDPOINTS.TRENDING_REPOS(formattedLanguage, daysAgo),
+    {
+      headers,
+    },
+  );
 
   if (res.status === 404) return null;
 

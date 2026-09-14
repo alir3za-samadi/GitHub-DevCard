@@ -1,12 +1,10 @@
-"use server";
-
 import { GITHUB_API_BASE_URL } from "@/queries/common/constants";
-import {
+import type {
   RawProfileDetails,
   RawProfileRepos,
   RawProfileRepoItem,
   RawProfileGivenStarredCount,
-} from "@/queries/profile/types";
+} from "@/queries/profile";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
@@ -31,7 +29,9 @@ const ENDPOINTS = {
 export async function fetchProfileDetails(
   username: string,
 ): Promise<RawProfileDetails | null> {
-  const res = await fetch(ENDPOINTS.PROFILE(username), {
+  const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
+
+  const res = await fetch(ENDPOINTS.PROFILE(formattedUsername), {
     headers,
   });
 
@@ -47,7 +47,9 @@ export async function fetchProfileDetails(
 export async function fetchProfileRepos(
   username: string,
 ): Promise<RawProfileRepos | null> {
-  const res = await fetch(ENDPOINTS.REPOSITORIES(username), {
+  const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
+
+  const res = await fetch(ENDPOINTS.REPOSITORIES(formattedUsername), {
     headers,
   });
 
@@ -63,7 +65,9 @@ export async function fetchProfileRepos(
 export async function fetchProfileGivenStarredCount(
   username: string,
 ): Promise<RawProfileGivenStarredCount | null> {
-  const res = await fetch(ENDPOINTS.USER_STARRED(username), {
+  const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
+
+  const res = await fetch(ENDPOINTS.USER_STARRED(formattedUsername), {
     headers,
   });
 
@@ -81,8 +85,10 @@ export async function fetchProfileGivenStarredCount(
 export async function fetchProfileFeaturedRepo(
   username: string,
 ): Promise<RawProfileRepoItem | null> {
+  const formattedUsername = encodeURIComponent(username.trim().toLowerCase());
+
   const starredRes = await fetch(
-    ENDPOINTS.USER_SEARCH_REPOS(username, "stars"),
+    ENDPOINTS.USER_SEARCH_REPOS(formattedUsername, "stars"),
     {
       headers,
     },
@@ -105,7 +111,7 @@ export async function fetchProfileFeaturedRepo(
   }
 
   const updatedRes = await fetch(
-    ENDPOINTS.USER_SEARCH_REPOS(username, "updated"),
+    ENDPOINTS.USER_SEARCH_REPOS(formattedUsername, "updated"),
     {
       headers,
     },

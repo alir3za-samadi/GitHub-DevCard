@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchTrendingRepos } from "./api";
-import { trendingKeys } from "./keys";
-import { formatTrendingRepos } from "./utils";
+import {
+  fetchTrendingRepos,
+  trendingKeys,
+  formatTrendingRepos,
+  isValidLanguage,
+} from "@/queries/trending";
 
 export function useTrending(language: string = "", daysAgo: number = 30) {
   const trendingQuery = useTrendingRepos(language, daysAgo);
@@ -34,9 +37,12 @@ export function useTrending(language: string = "", daysAgo: number = 30) {
 }
 
 export function useTrendingRepos(language: string, daysAgo: number = 30) {
+  const validLanguage = !language || isValidLanguage(language);
+
   return useQuery({
     queryKey: trendingKeys.repos(language, daysAgo),
     queryFn: () => fetchTrendingRepos(language, daysAgo),
+    enabled: validLanguage,
     staleTime: 1000 * 60 * 60,
     gcTime: 1000 * 60 * 120,
   });

@@ -1,9 +1,12 @@
-import {
+import { TOP_LANGUAGES } from "@/queries/common/constants";
+import type { LanguagesValue } from "@/queries/trending";
+
+import type {
   RawTrendingRepoItem,
   RawTrendingReposResponse,
   TrendingRepoItem,
   TrendingReposData,
-} from "@/queries/trending/types";
+} from "@/queries/trending";
 
 export function formatTrendingRepoItem(
   repo: RawTrendingRepoItem,
@@ -39,3 +42,7 @@ export function getDaysAge(daysAgo: number = 30): string {
   targetDate.setDate(targetDate.getDate() - daysAgo);
   return targetDate.toISOString().split("T")[0];
 }
+
+export const isValidLanguage = (lang: string): lang is LanguagesValue => {
+  return TOP_LANGUAGES.some((item) => item.value === lang.trim().toLowerCase());
+};

@@ -28,10 +28,12 @@ export async function GET(request: NextRequest) {
     const formattedData = formatTrendingRepos(rawData);
 
     return NextResponse.json(formattedData, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message || "Failed to fetch trending repositories" },
-      { status: 500 },
-    );
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Failed to fetch trending repositories";
+
+    return NextResponse.json({ errorMessage }, { status: 500 });
   }
 }

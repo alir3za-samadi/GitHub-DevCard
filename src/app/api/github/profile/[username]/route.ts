@@ -42,10 +42,10 @@ export async function GET(
       login: userData.login,
       totalStars,
     });
-  } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message || "Failed to fetch GitHub data" },
-      { status: 500 },
-    );
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to fetch GitHub data";
+
+    return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
 }

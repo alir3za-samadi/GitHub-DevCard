@@ -6,6 +6,8 @@ export interface Language {
   color: string;
 }
 
+export type LanguagesValue = (typeof TOP_LANGUAGES)[number]["value"];
+
 // Raw API Response Types
 export interface RawTrendingRepoItem {
   id: number;

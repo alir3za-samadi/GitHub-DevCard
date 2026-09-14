@@ -4,13 +4,11 @@ import {
   fetchProfileRepos,
   fetchProfileGivenStarredCount,
   fetchProfileFeaturedRepo,
-} from "@/queries/profile/api";
-import { profileKeys } from "@/queries/profile/keys";
-import {
+  profileKeys,
   formatProfile,
   formatRepos,
   formatRepoItem,
-} from "@/queries/profile/utils";
+} from "@/queries/profile";
 
 const isUsernameValid = (username: string) =>
   Boolean(username && username.trim().length > 0);

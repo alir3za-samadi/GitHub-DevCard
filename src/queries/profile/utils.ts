@@ -1,4 +1,4 @@
-import {
+import type {
   RawProfileDetails,
   RawProfileRepoItem,
   RawProfileRepos,
@@ -6,7 +6,7 @@ import {
   ProfileRepoItem,
   ProfileRepos,
   LanguageStat,
-} from "@/queries/profile/types";
+} from "@/queries/profile";
 
 export function formatProfile(
   raw: RawProfileDetails,
