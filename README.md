@@ -2,14 +2,19 @@
 
 > Search any GitHub username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
-![TanStack Query](https://img.shields.io/badge/TanStack%20Query-v5-FF4154?logo=reactquery&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
-![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
+<div align="center">
+
+<img src="https://custom-icon-badges.demolab.com/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+<img src="https://custom-icon-badges.demolab.com/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+<img src="https://custom-icon-badges.demolab.com/badge/TypeScript_Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+<img src="https://custom-icon-badges.demolab.com/badge/TanStack_Query_v5-FF4154?style=for-the-badge&logo=reactquery&logoColor=white" />
+<img src="https://custom-icon-badges.demolab.com/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+<img src="https://custom-icon-badges.demolab.com/badge/Vercel_Deployed-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+
+</div>
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
+
 > If the link doesn't load in your region, try opening it with a VPN enabled.
 
 ## 🎥 Demo
@@ -69,17 +74,17 @@
 
 ## Tech Stack
 
-| Layer | Choice |
-|---|---|
-| Framework | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions) |
-| Language | TypeScript (strict mode) |
+| Layer                   | Choice                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)    |
+| Language                | TypeScript (strict mode)                                                            |
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
-| Styling / UI | Tailwind CSS v4, shadcn/ui, Base UI |
-| Theming | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System) |
-| Forms & validation | react-hook-form + zod |
-| Card export | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download) |
-| Data source | [GitHub REST API](https://docs.github.com/en/rest) |
-| Deployment | Vercel |
+| Styling / UI            | Tailwind CSS v4, shadcn/ui, Base UI                                                 |
+| Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)       |
+| Forms & validation      | react-hook-form + zod                                                               |
+| Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
+| Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                  |
+| Deployment              | Vercel                                                                              |
 
 ## Why this architecture
 
@@ -128,9 +133,9 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable | Required | Description |
-|---|---|---|
-| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| Variable       | Required | Description                                                                                                                                                                                                                                                                                                                   |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GITHUB_TOKEN` | No       | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 
