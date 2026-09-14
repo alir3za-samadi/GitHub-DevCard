@@ -12,49 +12,47 @@
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
 > If the link doesn't load in your region, try opening it with a VPN enabled.
 
-## Demo
+## 🎥 Demo
 
 <div align="center">
-  <img src="./docs/demo.gif" width="800" alt="Full flow: search a username, view the profile, export the card"/>
+  <img src="./docs/demo.gif" width="100%" style="border-radius: 10px;" alt="DevCard Full Flow Demo"/>
 </div>
 
-<br/>
+<br />
 
-### Home Page
+### 🏠 Home Page
 
-<table>
-<tr>
-<td width="50%"><img src="./docs/home-page.png" width="100%"/><p align="center"><sub>Default theme</sub></p></td>
-<td width="50%"><img src="./docs/home-page-light.png" width="100%"/><p align="center"><sub>Light theme</sub></p></td>
-</tr>
-</table>
+<p align="center">
+  <img src="./docs/home-page.png" width="49%" alt="Home Page Dark Theme" />
+  <img src="./docs/home-page-light.png" width="49%" alt="Home Page Light Theme" />
+</p>
 
-### Profile Page
+---
 
-<table>
-<tr>
-<td width="50%"><img src="./docs/profile-page.png" width="100%"/><p align="center"><sub>Profile view</sub></p></td>
-<td width="50%"><img src="./docs/profile-page-generate-card.png" width="100%"/><p align="center"><sub>Generated card export</sub></p></td>
-</tr>
-</table>
+### 👤 Profile Page
 
-### Compare Page
+<p align="center">
+  <img src="./docs/profile-page.png" width="49%" alt="Profile View" />
+  <img src="./docs/profile-page-generate-card.png" width="49%" alt="Generated Card Export" />
+</p>
 
-<table>
-<tr>
-<td width="50%"><img src="./docs/compare-page.png" width="100%"/><p align="center"><sub>Head-to-head comparison</sub></p></td>
-<td width="50%"><img src="./docs/compare-page-generate-card.png" width="100%"/><p align="center"><sub>Generated card export</sub></p></td>
-</tr>
-</table>
+---
 
-### Trending Page
+### ⚔️ Compare Page
 
-<table>
-<tr>
-<td width="50%"><img src="./docs/trending-page.png" width="100%"/><p align="center"><sub>Trending repositories</sub></p></td>
-<td width="50%"><img src="./docs/trending-page-generate-card.png" width="100%"/><p align="center"><sub>Generated card export</sub></p></td>
-</tr>
-</table>
+<p align="center">
+  <img src="./docs/compare-page.png" width="49%" alt="Head-to-head Comparison" />
+  <img src="./docs/compare-page-generate-card.png" width="49%" alt="Generated Compare Card" />
+</p>
+
+---
+
+### 📈 Trending Page
+
+<p align="center">
+  <img src="./docs/trending-page.png" width="49%" alt="Trending Repositories" />
+  <img src="./docs/trending-page-generate-card.png" width="49%" alt="Generated Trending Card" />
+</p>
 
 ## Features
 
