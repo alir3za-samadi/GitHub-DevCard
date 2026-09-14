@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Code2, GitCompare, TrendingUp, Menu } from "lucide-react";
 import {
   Sheet,
@@ -7,6 +6,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/base/sheet";
+import Link from "next/link";
 
 export default function Navbar() {
   const navItems = [
@@ -18,7 +18,7 @@ export default function Navbar() {
     <header className="border-b border-border bg-background/70 backdrop-blur sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <Code2 className="w-6 h-6 text-primary" />
+          <Code2 className="w-6 h-6" />
           <span>DevCard</span>
         </Link>
 
