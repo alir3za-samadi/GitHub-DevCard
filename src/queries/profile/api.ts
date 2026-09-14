@@ -10,6 +10,14 @@ import {
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+const headers: RequestInit["headers"] = {
+  Accept: "application/vnd.github.v3+json",
+};
+
+if (GITHUB_TOKEN) {
+  headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+}
+
 const ENDPOINTS = {
   PROFILE: (username: string) => `${GITHUB_API_BASE_URL}/users/${username}`,
   REPOSITORIES: (username: string) =>
@@ -19,10 +27,6 @@ const ENDPOINTS = {
   USER_SEARCH_REPOS: (username: string, sort: "stars" | "updated") =>
     `${GITHUB_API_BASE_URL}/search/repositories?q=user:${username}&sort=${sort}&order=desc&per_page=1`,
 };
-
-const headers: RequestInit["headers"] = GITHUB_TOKEN
-  ? { Authorization: `Bearer ${GITHUB_TOKEN}` }
-  : {};
 
 export async function fetchProfileDetails(
   username: string,

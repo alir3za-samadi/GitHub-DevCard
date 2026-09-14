@@ -12,17 +12,11 @@ import {
   formatRepoItem,
 } from "@/queries/profile/utils";
 
-export function useProfile(username: string) {
-  const profileDetailsQuery = useQuery({
-    queryKey: profileKeys.details(username),
-    queryFn: () => fetchProfileDetails(username),
-    throwOnError: true,
-    enabled: Boolean(username && username.trim().length > 0),
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
-    refetchOnWindowFocus: false,
-  });
+const isUsernameValid = (username: string) =>
+  Boolean(username && username.trim().length > 0);
 
+export function useProfile(username: string) {
+  const profileDetailsQuery = useProfileDetails(username);
   const reposQuery = useProfileRepos(username);
   const starredQuery = useProfileGivenStarred(username);
   const featuredRepoQuery = useProfileFeaturedRepo(username);
@@ -31,23 +25,28 @@ export function useProfile(username: string) {
   const rawRepos = reposQuery.data ?? null;
   const rawFeaturedRepo = featuredRepoQuery.data ?? null;
 
-  const repos = rawRepos ? formatRepos(rawRepos) : null;
   const profile =
     rawProfile && rawRepos !== null
       ? formatProfile(rawProfile, rawRepos)
       : null;
+  const repos = rawRepos ? formatRepos(rawRepos) : null;
   const featuredRepo = rawFeaturedRepo ? formatRepoItem(rawFeaturedRepo) : null;
 
+  const hasValidUsername = isUsernameValid(username);
+
   const isLoading =
-    profileDetailsQuery.isPending ||
-    reposQuery.isPending ||
-    starredQuery.isPending ||
-    featuredRepoQuery.isPending;
+    hasValidUsername &&
+    (profileDetailsQuery.isLoading ||
+      reposQuery.isLoading ||
+      starredQuery.isLoading ||
+      featuredRepoQuery.isLoading);
 
   const isNotFound =
-    (!profileDetailsQuery.isPending && profileDetailsQuery.data === null) ||
-    (!reposQuery.isPending && reposQuery.data === null) ||
-    (!starredQuery.isPending && starredQuery.data === null);
+    hasValidUsername &&
+    !isLoading &&
+    (profileDetailsQuery.data === null ||
+      reposQuery.data === null ||
+      starredQuery.data === null);
 
   const isError =
     profileDetailsQuery.isError ||
@@ -62,6 +61,7 @@ export function useProfile(username: string) {
     featuredRepoQuery.error;
 
   const refetch = async () => {
+    if (!hasValidUsername) return;
     await Promise.all([
       profileDetailsQuery.refetch(),
       reposQuery.refetch(),
@@ -87,10 +87,7 @@ export function useProfileDetails(username: string) {
   return useQuery({
     queryKey: profileKeys.details(username),
     queryFn: () => fetchProfileDetails(username),
-    throwOnError: true,
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
-    refetchOnWindowFocus: false,
+    enabled: isUsernameValid(username),
   });
 }
 
@@ -98,10 +95,7 @@ export function useProfileRepos(username: string) {
   return useQuery({
     queryKey: profileKeys.repos(username),
     queryFn: () => fetchProfileRepos(username),
-    throwOnError: true,
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
-    refetchOnWindowFocus: false,
+    enabled: isUsernameValid(username),
   });
 }
 
@@ -109,10 +103,7 @@ export function useProfileGivenStarred(username: string) {
   return useQuery({
     queryKey: profileKeys.givenStarred(username),
     queryFn: () => fetchProfileGivenStarredCount(username),
-    throwOnError: true,
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
-    refetchOnWindowFocus: false,
+    enabled: isUsernameValid(username),
   });
 }
 
@@ -120,9 +111,6 @@ export function useProfileFeaturedRepo(username: string) {
   return useQuery({
     queryKey: profileKeys.featuredRepo(username),
     queryFn: () => fetchProfileFeaturedRepo(username),
-    throwOnError: true,
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
-    refetchOnWindowFocus: false,
+    enabled: isUsernameValid(username),
   });
 }

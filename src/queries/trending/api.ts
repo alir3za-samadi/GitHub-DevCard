@@ -4,16 +4,13 @@ import { RawTrendingReposResponse } from "@/queries/trending/types";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-// const headers: RequestInit["headers"] = {
-//   Accept: "application/vnd.github.v3+json",
-//   ...(process.env.NEXT_PUBLIC_GITHUB_TOKEN && {
-//     Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-//   }),
-// };
+const headers: RequestInit["headers"] = {
+  Accept: "application/vnd.github.v3+json",
+};
 
-const headers: RequestInit["headers"] = GITHUB_TOKEN
-  ? { Authorization: `Bearer ${GITHUB_TOKEN}` }
-  : {};
+if (GITHUB_TOKEN) {
+  headers.Authorization = `Bearer ${GITHUB_TOKEN}`;
+}
 
 const ENDPOINTS = {
   TRENDING_REPOS: (language: string, daysAgo: number) => {

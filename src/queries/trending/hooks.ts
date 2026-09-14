@@ -3,16 +3,16 @@ import { fetchTrendingRepos } from "./api";
 import { trendingKeys } from "./keys";
 import { formatTrendingRepos } from "./utils";
 
-export function useTrending(language: string, daysAgo: number = 30) {
+export function useTrending(language: string = "", daysAgo: number = 30) {
   const trendingQuery = useTrendingRepos(language, daysAgo);
 
   const rawData = trendingQuery.data ?? null;
 
   const data = rawData ? formatTrendingRepos(rawData) : null;
 
-  const isLoading = trendingQuery.isPending;
+  const isLoading = trendingQuery.isLoading;
 
-  const isNotFound = !trendingQuery.isPending && trendingQuery.data === null;
+  const isNotFound = !isLoading && trendingQuery.data === null;
 
   const isError = trendingQuery.isError;
   const error = trendingQuery.error;
@@ -23,7 +23,7 @@ export function useTrending(language: string, daysAgo: number = 30) {
 
   return {
     data,
-    repos: data ? data.items : null,
+    repos: data?.items ?? null,
     totalCount: data?.totalCount ?? 0,
     isLoading,
     isNotFound,
@@ -38,7 +38,6 @@ export function useTrendingRepos(language: string, daysAgo: number = 30) {
     queryKey: trendingKeys.repos(language, daysAgo),
     queryFn: () => fetchTrendingRepos(language, daysAgo),
     staleTime: 1000 * 60 * 60,
-    retry: 1,
-    refetchOnWindowFocus: false,
+    gcTime: 1000 * 60 * 120,
   });
 }
