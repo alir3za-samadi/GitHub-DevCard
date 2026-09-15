@@ -123,7 +123,7 @@ graph TD
 
 ```
 
-The functions that actually call the GitHub API (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) are marked `"use server"`, so the fetch logic — and the optional `GITHUB_TOKEN` — never ships to the client bundle. Each feature then wraps those server functions in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
+The functions fetching data from GitHub (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) run exclusively on the server side (via Next.js server components and proxy route handlers), ensuring the fetch logic and optional `GITHUB_TOKEN` are never exposed to the client bundle. Each feature then wraps those server-side fetches in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
 
 * **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
 * **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
