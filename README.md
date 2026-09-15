@@ -13,7 +13,7 @@
 
 </div>
 
-**🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
+**🔗 Live demo:** [GitHub DevCard](https://github-dev-card.vercel.app/)
 
 ## 🎥 Demo
 
@@ -77,11 +77,30 @@
 | Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)    |
 | Language                | TypeScript (strict mode)                                                            |
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
-| Styling / UI            | Tailwind CSS v4, shadcn/ui, Base UI                                                 |
+| Styling / UI            | [Tailwind CSS v4](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Base UI](https://base-ui.com) |
 | Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)       |
 | Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
 | Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                  |
 | Deployment              | Vercel                                                                              |
+
+## Project Structure
+
+```text
+src/
+├── app/              # Next.js App Router pages, layout, and API routes
+├── components/       # Shared UI primitives (shadcn/ui, Base UI, icons)
+├── features/         # Feature-driven UI components & business logic
+│   ├── compare/      # Compare page components & comparison card generator
+│   ├── home/         # Landing page search & hero components
+│   ├── profile/      # Profile view, stats grid & card export
+│   └── trending/     # Trending repositories list & filters
+├── queries/          # Data fetching layer (Server Actions, React Query hooks, formatters)
+│   ├── compare/
+│   ├── profile/
+│   └── trending/
+└── types/            # TypeScript interfaces & GitHub API payload types
+
+```
 
 ## Why this architecture
 
@@ -93,11 +112,22 @@ Code is organized under `src/features/<feature>` (`profile`, `compare`, `trendin
 
 ### Server Actions + TanStack React Query for data fetching
 
+```mermaid
+graph TD
+  UI[React Client Component] -->|useQuery| Hook[Custom TanStack Query Hook]
+  Hook -->|Executes| SA["Next.js Server Action ('use server')"]
+  SA -->|Fetches / Secures GITHUB_TOKEN| GH[GitHub REST API]
+  GH -->|Response Data| SA
+  SA -->|Cached Response| Hook
+  Hook -->|State & Data| UI
+
+```
+
 The functions that actually call the GitHub API (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) are marked `"use server"`, so the fetch logic — and the optional `GITHUB_TOKEN` — never ships to the client bundle. Each feature then wraps those server functions in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
 
-- **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
-- **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
-- A profile page that needs four separate GitHub calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
+* **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
+* **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
+* A profile page that needs four separate GitHub calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
 
 ### Standalone `/api/github/...` routes
 
@@ -113,7 +143,7 @@ The functions that actually call the GitHub API (`src/queries/profile/api.ts`, `
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/alir3za-samadi/Github-DevCard.git
+git clone [https://github.com/alir3za-samadi/Github-DevCard.git](https://github.com/alir3za-samadi/Github-DevCard.git)
 cd Github-DevCard
 
 # 2. Install dependencies (pnpm is what this repo is locked to)
@@ -124,22 +154,34 @@ cp .env.example .env.local
 
 # 4. Run the dev server
 pnpm dev
+
 ```
 
 Then open [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable       | Required | Description                                                                                                                                                                                                                                                                                                                   |
-| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GITHUB_TOKEN` | No       | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| Variable | Required | Description |
+| --- | --- | --- |
+| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 
 ```env
 GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+
 ```
+
+## Roadmap
+
+* [ ] Implement `next/og` for dynamic social graph preview images when sharing profile links.
+* [ ] Add PDF export option alongside PNG for developer resumes.
+* [ ] Support custom color theme customization for exported dev cards.
 
 ## License
 
+Distributed under the MIT License. See `LICENSE` for more information.
+
 Copyright (c) 2026 alir3za-samadi
+
+```
