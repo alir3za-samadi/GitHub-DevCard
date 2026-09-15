@@ -137,7 +137,7 @@ The functions fetching data from GitHub (`src/queries/profile/api.ts`, `src/quer
 
 `/profile/[username]`, `/compare`, and `/trending` all use the async `generateMetadata` function rather than a static `export const metadata`, because the content of each page depends on the URL: which username was searched, which two users are being compared, or which language is selected. A static export can't see any of that — `generateMetadata` runs per-request with access to `params`/`searchParams`, so the `<title>` and description actually describe what's being viewed instead of one generic title reused everywhere.
 
-> Currently this covers text metadata only (title, description, Open Graph/Twitter tags) — there's no `next/og` image generation in this version, so shared links show a text preview rather than a custom card image.
+> Currently this covers text metadata (title, description, Open Graph, and Twitter tags), so shared links show a rich text preview when posted on social platforms.
 
 ## Getting Started
 
