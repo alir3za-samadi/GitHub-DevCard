@@ -15,8 +15,6 @@
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
 
-> If the link doesn't load in your region, try opening it with a VPN enabled.
-
 ## 🎥 Demo
 
 <div align="center">
@@ -62,15 +60,15 @@
 ## Features
 
 - 🔍 **Search any GitHub username** and jump straight to a full profile view
-- 📊 **Profile stats** — followers, public repo count, total stars collected across all repos, top languages breakdown
-- ⭐ **Highlighted repo** — automatically surfaces the user's most-starred (or most recently updated) repository
-- 🖼️ **Exportable dev card** — renders the profile as a styled card and downloads it as a PNG, client-side, with no server round-trip
-- ⚖️ **Compare mode** — put two GitHub users head-to-head
-- 📈 **Trending repos** — browse trending repositories filtered by language and time window
-- 🌓 **Light / Dark / System theme toggle** — persisted across visits, with no flash of the wrong theme on initial load
-- 📱 **Responsive navbar** — dedicated mobile menu alongside the desktop nav
-- 🔎 **Dynamic per-page SEO** — profile, compare, and trending pages each build their own `<title>`/description at request time via `generateMetadata`
-- 🎨 **Polished, responsive UI** — built with shadcn/ui + Base UI on top of Tailwind CSS v4
+- 📊 **Profile stats** - followers, public repo count, total stars collected across all repos, top languages breakdown
+- ⭐ **Highlighted repo** - automatically surfaces the user's most-starred (or most recently updated) repository
+- 🖼️ **Exportable dev card** - renders the profile as a styled card and downloads it as a PNG, client-side, with no server round-trip
+- ⚖️ **Compare mode** - put two GitHub users head-to-head
+- 📈 **Trending repos** - browse trending repositories filtered by language and time window
+- 🌓 **Light / Dark / System theme toggle** - persisted across visits, with no flash of the wrong theme on initial load
+- 📱 **Responsive navbar** - dedicated mobile menu alongside the desktop nav
+- 🔎 **Dynamic per-page SEO** - profile, compare, and trending pages each build their own `<title>`/description at request time via `generateMetadata`
+- 🎨 **Polished, responsive UI** - built with shadcn/ui + Base UI on top of Tailwind CSS v4
 
 ## Tech Stack
 
@@ -81,7 +79,6 @@
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
 | Styling / UI            | Tailwind CSS v4, shadcn/ui, Base UI                                                 |
 | Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)       |
-| Forms & validation      | react-hook-form + zod                                                               |
 | Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
 | Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                  |
 | Deployment              | Vercel                                                                              |

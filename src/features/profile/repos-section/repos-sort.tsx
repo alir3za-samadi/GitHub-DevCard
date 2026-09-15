@@ -8,26 +8,19 @@ import {
   SelectValue,
 } from "@/components/base/select";
 import { SORT_OPTIONS } from "@/lib/constants";
-import type { SortOptionsValue } from "@/lib/types";
 
 export default function ReposSort({
   sortBy,
   onValueChange,
 }: {
-  sortBy: SortOptionsValue;
-  onValueChange: (value: SortOptionsValue) => void;
+  sortBy: string;
+  onValueChange: (value: string | null) => void;
 }) {
   return (
     <div className="flex items-center w-1/2 gap-2 text-xs text-muted-foreground">
       <span className="min-w-fit">Sort by:</span>
 
-      <Select
-        items={SORT_OPTIONS}
-        value={sortBy}
-        onValueChange={(val) => {
-          if (val) onValueChange(val);
-        }}
-      >
+      <Select items={SORT_OPTIONS} value={sortBy} onValueChange={onValueChange}>
         <SelectTrigger className="w-full max-w-40 text-xs md:text-sm">
           <SelectValue />
         </SelectTrigger>

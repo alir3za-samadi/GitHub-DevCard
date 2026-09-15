@@ -5,7 +5,7 @@ import ReposSort from "@/features/profile/repos-section/repos-sort";
 import ReposExport from "@/features/profile/repos-section/repos-export";
 import ReposList from "@/features/profile/repos-section/repos-list";
 import ReposPaginationControls from "@/features/profile/repos-section/repos-pagination-controls";
-import { sortRepos } from "@/lib/utils";
+import { isValidSortBy, sortRepos } from "@/lib/utils";
 import type { SortOptionsValue } from "@/lib/types";
 import type { ProfileRepos } from "@/queries/profile/types";
 
@@ -24,8 +24,11 @@ export default function ReposSection({ repos }: { repos: ProfileRepos }) {
 
   const paginatedRepos = sortedRepos.slice(startItem, endItem);
 
-  function handleValueChange(value: SortOptionsValue) {
-    setSortBy(value);
+  function handleValueChange(value: string | null) {
+    if (value && isValidSortBy(value)) {
+      setSortBy(value);
+    }
+
     setCurrentPage(1);
   }
 

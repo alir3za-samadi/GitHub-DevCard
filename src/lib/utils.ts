@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { SORT_OPTIONS } from "@/lib/constants";
 
 import type { SortOptionsValue } from "@/lib/types";
 import type { ProfileRepos } from "@/queries/profile/types";
@@ -39,3 +40,9 @@ export function sortRepos(repos: ProfileRepos, sortBy: SortOptionsValue) {
 
   return newRepos;
 }
+
+export const isValidSortBy = (sortBy: string): sortBy is SortOptionsValue => {
+  return SORT_OPTIONS.some(
+    (item) => item.value === sortBy.trim().toLowerCase(),
+  );
+};

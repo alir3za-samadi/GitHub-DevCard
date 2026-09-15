@@ -76,8 +76,6 @@ export interface ProfileRepoItem {
 
 export type ProfileRepos = ProfileRepoItem[];
 
-export type ProfileGivenStarredCount = number;
-
 // Helper / Computed Types
 export interface LanguageStat {
   language: string;
