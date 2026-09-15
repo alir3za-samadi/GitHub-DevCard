@@ -75,13 +75,13 @@
 | Layer                   | Choice                                                                                                         |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------- |
 | Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)                               |
-| Language                | TypeScript (strict mode)                                                                                       |
+| Language                | [TypeScript (strict mode)](https://www.typescriptlang.org/)                                                    |
 | Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions                            |
 | Styling / UI            | [Tailwind CSS v4](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Base UI](https://base-ui.com) |
 | Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)                                  |
 | Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)                             |
 | Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                                             |
-| Deployment              | Vercel                                                                                                         |
+| Deployment              | [Vercel](https://vercel.com/)                                                                                  |
 
 ## Project Structure
 
