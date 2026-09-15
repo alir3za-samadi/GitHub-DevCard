@@ -145,4 +145,4 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 
 ## License
 
-No license specified yet — all rights reserved by default.
+Copyright (c) 2026 alir3za-samadi
