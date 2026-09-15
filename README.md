@@ -72,16 +72,16 @@
 
 ## Tech Stack
 
-| Layer                   | Choice                                                                              |
-| ----------------------- | ----------------------------------------------------------------------------------- |
-| Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)    |
-| Language                | TypeScript (strict mode)                                                            |
-| Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions |
+| Layer                   | Choice                                                                                                         |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Framework               | [Next.js 16](https://nextjs.org) (App Router, Server Components, Server Actions)                               |
+| Language                | TypeScript (strict mode)                                                                                       |
+| Data fetching & caching | [TanStack React Query](https://tanstack.com/query) on top of Next.js Server Actions                            |
 | Styling / UI            | [Tailwind CSS v4](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com), [Base UI](https://base-ui.com) |
-| Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)       |
-| Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)  |
-| Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                  |
-| Deployment              | Vercel                                                                              |
+| Theming                 | [next-themes](https://github.com/pacocoursey/next-themes) (Light/Dark/System)                                  |
+| Card export             | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download)                             |
+| Data source             | [GitHub REST API](https://docs.github.com/en/rest)                                                             |
+| Deployment              | Vercel                                                                                                         |
 
 ## Project Structure
 
@@ -125,9 +125,9 @@ graph TD
 
 The functions that actually call the GitHub API (`src/queries/profile/api.ts`, `src/queries/trending/api.ts`) are marked `"use server"`, so the fetch logic — and the optional `GITHUB_TOKEN` — never ships to the client bundle. Each feature then wraps those server functions in a `useQuery` hook (`useProfile`, `useProfileRepos`, `useProfileFeaturedRepo`, etc.), which gives:
 
-* **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
-* **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
-* A profile page that needs four separate GitHub calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
+- **Client-side caching** — a 5-minute stale time and 30-minute garbage-collection window, so revisiting a profile you just viewed doesn't re-trigger a GitHub call.
+- **Built-in retry, loading, and error state** per query, instead of hand-rolled `isLoading`/`isError` booleans for every fetch.
+- A profile page that needs four separate GitHub calls (details, repos, starred count, featured repo) can fire them independently and combine their states, rather than one large sequential fetch blocking the whole page.
 
 ### Standalone `/api/github/...` routes
 
@@ -161,9 +161,9 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ## Environment Variables
 
-| Variable | Required | Description |
-| --- | --- | --- |
-| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| Variable       | Required | Description                                                                                                                                                                                                                                                                                                                   |
+| -------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GITHUB_TOKEN` | No       | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 
@@ -172,16 +172,8 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 
 ```
 
-## Roadmap
-
-* [ ] Implement `next/og` for dynamic social graph preview images when sharing profile links.
-* [ ] Add PDF export option alongside PNG for developer resumes.
-* [ ] Support custom color theme customization for exported dev cards.
-
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 Copyright (c) 2026 alir3za-samadi
-
-```
