@@ -1,7 +1,5 @@
 import PageHeader from "@/components/ui/page-header";
 import UserProfile from "@/features/profile/user-profile";
-import { notFound } from "next/navigation";
-import { useProfile } from "@/queries/profile";
 import type { Metadata } from "next";
 
 export async function generateMetadata({

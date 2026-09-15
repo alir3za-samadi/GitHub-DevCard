@@ -1,5 +1,11 @@
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { LogoText } from "@/components/ui/logo";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/base/tooltip";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -10,8 +16,24 @@ export default function Footer() {
           <LogoText className="text-muted-foreground" />
         </div>
 
-        <p className="text-center text-muted-foreground">
-          Made by Alir3za Samadi
+        <p className="flex flex-col justify-center items-center gap-1 text-muted-foreground md:flex-row">
+          <span>Made with </span>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Link
+                  href="/profile/alir3za-samadi"
+                  className="text-foreground"
+                />
+              }
+            >
+              Alireza Samadi
+            </TooltipTrigger>
+
+            <TooltipContent side={"bottom"}>
+              <p>Check Creator Github Profile</p>
+            </TooltipContent>
+          </Tooltip>
         </p>
 
         <div className="flex justify-end">
