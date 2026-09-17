@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/base/skeleton";
 export default function CompareUsersLoading() {
   return (
     <div className="w-full mx-auto space-y-6">
-      <Skeleton className="h-10 w-full mx-auto rounded-md md:w-30" />
+      <Skeleton className="h-9 w-full mx-auto rounded-md md:w-30" />
 
       <div className="flex flex-col gap-4 md:flex-row items-center">
         <UserInfoSkeleton />
