@@ -10,13 +10,13 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="flex justify-center border-t border-border h-16 mt-auto">
-      <div className="w-full max-w-6xl mx-auto px-4 grid grid-cols-3 items-center text-xs ">
-        <div className="flex justify-center items-center gap-2">
+      <div className="w-full max-w-6xl mx-auto px-4 grid grid-cols-3 items-center">
+        <div className="flex justify-center md:justify-start">
           <LogoText className="text-muted-foreground" />
         </div>
 
-        <p className="flex flex-col justify-center items-center gap-1 text-muted-foreground md:flex-row">
-          <span>Made By </span>
+        <div className="flex flex-col items-center gap-1 text-[11px] text-muted-foreground mx-auto md:flex-row">
+          Made By
           <Tooltip>
             <TooltipTrigger
               render={
@@ -30,12 +30,12 @@ export default function Footer() {
             </TooltipTrigger>
 
             <TooltipContent side={"bottom"}>
-              <p>Check Creator Github Profile</p>
+              <p>Click to check profile</p>
             </TooltipContent>
           </Tooltip>
-        </p>
+        </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center md:justify-end">
           <ModeToggle />
         </div>
       </div>
