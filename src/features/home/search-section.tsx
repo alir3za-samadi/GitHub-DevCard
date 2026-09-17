@@ -26,7 +26,7 @@ export default function SearchSection() {
   }
 
   return (
-    <div className="flex gap-4 flex-col items-center w-100">
+    <div className="flex gap-4 flex-col items-center">
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col px-6 gap-2 md:flex-row">
           <Field orientation="horizontal" className="">
@@ -49,35 +49,36 @@ export default function SearchSection() {
           </Button>
         </div>
       </form>
-      <p className="flex gap-1 items-center text-muted-foreground">
+      <p className="flex flex-col gap-1 items-center text-muted-foreground sm:flex-row">
         Try:
-        {PRESET_USERS.map((user, index) => {
-          return (
-            <span key={user} className="">
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <Link
-                      href={`/profile/${user}`}
-                      className="text-foreground"
-                    />
-                  }
-                >
-                  {user}
-                </TooltipTrigger>
-
-                <TooltipContent side={"bottom"}>
-                  <p>Click to search</p>
-                </TooltipContent>
-              </Tooltip>
-
+        <div className="text-sm sm:text-base">
+          {PRESET_USERS.map((user, index) => {
+            return (
               <span key={user} className="">
-                {" "}
-                {index < PRESET_USERS.length - 1 && <span>·</span>}
+                <Tooltip>
+                  <TooltipTrigger
+                    render={
+                      <Link
+                        href={`/profile/${user}`}
+                        className="text-foreground"
+                      />
+                    }
+                  >
+                    {user}
+                  </TooltipTrigger>
+
+                  <TooltipContent side={"bottom"}>
+                    <p>Click to search</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <span key={user} className="">
+                  {index < PRESET_USERS.length - 1 && <span> · </span>}
+                </span>
               </span>
-            </span>
-          );
-        })}
+            );
+          })}
+        </div>
       </p>
     </div>
   );
