@@ -2,8 +2,8 @@ import { Badge } from "@/components/base/badge";
 import { Card } from "@/components/base/card";
 import { Star, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { TrendingRepoItem, Language } from "@/queries/trending";
+import Avatar from "@/components/ui/avatar";
 
 export default function Repo({
   repo,
@@ -22,13 +22,12 @@ export default function Repo({
       <Card className="p-4 transition-all duration-200 hover:border-foreground/30 hover:bg-accent/40 flex items-start justify-between gap-5">
         <div className="space-y-4 flex-1 min-w-0">
           <div className="flex items-center gap-2.5">
-            <Image
+            <Avatar
               src={repo.owner.avatarUrl}
-              alt={`${repo.owner.login}-avatar`}
-              width={56}
-              height={56}
-              className="w-10 h-10 rounded-full overflow-hidden shrink-0 border border-border bg-foreground md:w-13 md:h-13"
+              alt={repo.owner.login}
+              className="w-10 h-10 md:w-13 md:h-13"
             />
+
             <h2 className="font-bold text-[13px] truncate md:text-base">
               <span className="text-muted-foreground font-normal">
                 {repo.owner.login} /{" "}

@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import type { ProfileDetails } from "@/queries/profile";
+import Avatar from "@/components/ui/avatar";
 
 export default function Information({
   profile,
@@ -11,13 +12,7 @@ export default function Information({
 }) {
   return (
     <div className={cn("flex items-center gap-4", className)}>
-      <Image
-        src={profile.avatarUrl}
-        alt={`${profile.username}-avatar`}
-        width={56}
-        height={56}
-        className="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-border bg-foreground"
-      />
+      <Avatar src={profile.avatarUrl} alt={profile.username} />
 
       <div className="flex flex-col">
         <h1 className="text-[17px] font-semibold text-foreground leading-tight">

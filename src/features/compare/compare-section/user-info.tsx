@@ -1,7 +1,6 @@
-import Image from "next/image";
-
 import type { ProfileDetails } from "@/queries/profile";
 import { cn } from "@/lib/utils";
+import Avatar from "@/components/ui/avatar";
 
 const USER_INFO_CONFIG = [
   {
@@ -31,13 +30,7 @@ export default function UserInfo({
 }) {
   return (
     <div className="w-full p-5 border rounded-xl bg-card flex items-center gap-4 md:w-1/2">
-      <Image
-        src={userProfileData.avatarUrl}
-        alt={`${userProfileData.username}-avatar`}
-        width={56}
-        height={56}
-        className="w-14 h-14 rounded-full overflow-hidden shrink-0 border border-border bg-foreground"
-      />
+      <Avatar src={userProfileData.avatarUrl} alt={userProfileData.username} />
 
       <div className="space-y-1">
         <h3 className="font-bold text-lg">{userProfileData.username}</h3>
