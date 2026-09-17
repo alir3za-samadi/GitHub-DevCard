@@ -15,17 +15,11 @@ export default function UserProfile({ username }: { username: string }) {
     featuredRepo,
     isLoading,
     isNotFound,
-    isError,
-    error,
   } = useProfile(username);
 
   if (isLoading) {
     return <UserProfileLoading />;
   }
-
-  // if (isError) {
-  //   throw error;
-  // }
 
   if (isNotFound || !profile) {
     notFound();

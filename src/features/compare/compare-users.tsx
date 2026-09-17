@@ -23,14 +23,12 @@ export default function CompareUsers({
     profile: profileA,
     isLoading: isLoadingA,
     isNotFound: isNotFoundA,
-    isError: isErrorA,
   } = profileDataA;
 
   const {
     profile: profileB,
     isLoading: isLoadingB,
     isNotFound: isNotFoundB,
-    isError: isErrorB,
   } = profileDataB;
 
   const isLoading =

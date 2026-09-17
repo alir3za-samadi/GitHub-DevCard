@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/base/skeleton";
 export default function CompareUsersLoading() {
   return (
     <div className="w-full mx-auto space-y-6">
-      <Skeleton className="h-10 w-30 mx-auto rounded-md" />
+      <Skeleton className="h-10 w-full mx-auto rounded-md md:w-30" />
 
       <div className="flex flex-col gap-4 md:flex-row items-center">
         <UserInfoSkeleton />
@@ -12,30 +12,6 @@ export default function CompareUsersLoading() {
       </div>
 
       <HeadToHeadSkeleton />
-    </div>
-  );
-}
-
-function CompareFormSkeleton() {
-  return (
-    <div className="flex flex-col items-center gap-4 w-full">
-      <div className="flex flex-col w-full gap-2 px-4 pt-8 border rounded-xl bg-card items-center md:items-start md:flex-row lg:gap-4">
-        <div className="flex-1 w-full space-y-2">
-          <Skeleton className="h-10 w-full rounded-md" />
-          <div className="min-h-2 mb-1 md:min-h-5" />
-        </div>
-
-        <Skeleton className="h-5 w-5 shrink-0 my-2 rounded-full" />
-
-        <div className="flex-1 w-full space-y-2">
-          <div className="min-h-2 md:hidden" />
-          <Skeleton className="h-10 w-full rounded-md" />
-          <div className="min-h-2 mb-1 md:min-h-5" />
-        </div>
-      </div>
-
-      <Skeleton className="h-10 w-full min-w-30 md:w-28 rounded-md" />
-      <Skeleton className="h-4 w-48 rounded-md" />
     </div>
   );
 }

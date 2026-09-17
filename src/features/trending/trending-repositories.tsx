@@ -14,14 +14,7 @@ export default function TrendingRepositories({
 }: {
   currentLang: Language;
 }) {
-  const { repos, isLoading, isError, error } = useTrending(
-    currentLang.label,
-    30,
-  );
-
-  if (isError) {
-    throw error;
-  }
+  const { repos, isLoading } = useTrending(currentLang.label, 30);
 
   return (
     <div className="space-y-6">
