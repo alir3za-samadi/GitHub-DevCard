@@ -18,6 +18,7 @@ const ENDPOINTS = {
 
 function getHeaders(): RequestInit["headers"] {
   const token = process.env.GITHUB_TOKEN;
+
   const headers: Record<string, string> = {
     Accept: "application/vnd.github.v3+json",
   };

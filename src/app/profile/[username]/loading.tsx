@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">
       <div className="flex items-center justify-center">
-        <Skeleton className="h-6 w-48" />
+        <Skeleton className="h-8 w-48" />
       </div>
 
       <Separator />

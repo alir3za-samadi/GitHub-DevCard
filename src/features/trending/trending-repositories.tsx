@@ -5,8 +5,8 @@ import FilterSection from "@/features/trending/trending-section/filter-section";
 import ReposSection from "@/features/trending/trending-section/repos-section";
 import GenerateCard from "@/components/ui/generate-card";
 import TrendingRepositoriesLoading from "@/features/trending/trending-repositories-loading";
-
 import { useTrending } from "@/queries/trending";
+import { DAYS_AGE } from "@/queries/common/constants";
 import type { Language } from "@/queries/trending";
 
 export default function TrendingRepositories({
@@ -14,7 +14,7 @@ export default function TrendingRepositories({
 }: {
   currentLang: Language;
 }) {
-  const { repos, isLoading } = useTrending(currentLang.label, 30);
+  const { repos, isLoading } = useTrending(currentLang.label, DAYS_AGE);
 
   return (
     <div className="space-y-6">

@@ -36,3 +36,5 @@ export const TOP_LANGUAGES = [
 export const VALID_LANGUAGES = TOP_LANGUAGES.map((lang) => lang.value).join(
   ", ",
 );
+
+export const DAYS_AGE = 30;

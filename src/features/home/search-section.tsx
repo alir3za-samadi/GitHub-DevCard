@@ -49,7 +49,7 @@ export default function SearchSection() {
           </Button>
         </div>
       </form>
-      <p className="flex flex-col gap-1 items-center text-muted-foreground sm:flex-row">
+      <div className="flex flex-col gap-1 items-center text-muted-foreground sm:flex-row">
         Try:
         <div className="text-sm sm:text-base">
           {PRESET_USERS.map((user, index) => {
@@ -79,7 +79,7 @@ export default function SearchSection() {
             );
           })}
         </div>
-      </p>
+      </div>
     </div>
   );
 }

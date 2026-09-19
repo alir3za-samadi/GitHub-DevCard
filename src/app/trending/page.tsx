@@ -1,8 +1,10 @@
 import PageHeader from "@/components/ui/page-header";
 import TrendingRepositories from "@/features/trending/trending-repositories";
-import { TOP_LANGUAGES } from "@/queries/common/constants";
+import { TOP_LANGUAGES, DAYS_AGE } from "@/queries/common/constants";
 import { isValidLanguage } from "@/queries/trending";
+import { prefetchTrendingRepos } from "@/queries/trending";
 import { notFound } from "next/navigation";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -45,12 +47,16 @@ export default async function TrendingPage({
     TOP_LANGUAGES.find((l) => l.value === formattedLanguage) ||
     TOP_LANGUAGES[0];
 
+  const queryClient = await prefetchTrendingRepos(currentLang.label, DAYS_AGE);
+
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">
       <PageHeader
         title={`Trending ${currentLang.label} Repositories on GitHub`}
       />
-      <TrendingRepositories currentLang={currentLang} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <TrendingRepositories currentLang={currentLang} />
+      </HydrationBoundary>
     </div>
   );
 }

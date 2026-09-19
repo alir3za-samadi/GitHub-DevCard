@@ -4,11 +4,15 @@ import { Separator } from "@/components/base/separator";
 export default function Loading() {
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">
+      <div className="flex items-center justify-center">
+        <Skeleton className="h-8 w-85" />
+      </div>
+
       <CompareFormSkeleton />
 
       <Separator />
 
-      <Skeleton className="h-9 w-full rounded-md" />
+      <Skeleton className="h-9 w-full mx-auto rounded-md md:w-30" />
 
       <div className="flex flex-col gap-4 md:flex-row items-center">
         <UserInfoSkeleton />
