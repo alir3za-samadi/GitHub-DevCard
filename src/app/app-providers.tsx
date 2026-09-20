@@ -8,7 +8,7 @@ import { TooltipProvider } from "@/components/base/tooltip";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export default function AppProviders({ children }: { children: ReactNode }) {
-  const [queryClient] = useState(() => getQueryClient());
+  const queryClient = getQueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
