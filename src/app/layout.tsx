@@ -48,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: `window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { supportsMono: true };`,
           }}
         />
+      
       </body>
     </html>
   );
