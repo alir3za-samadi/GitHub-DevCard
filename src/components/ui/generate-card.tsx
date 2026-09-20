@@ -38,6 +38,7 @@ export default function GenerateCard({
 
     const blob = await toBlob(node, {
       cacheBust: true,
+      skipAutoScale: false,
       height: node.scrollHeight,
       width: node.scrollWidth,
       pixelRatio: 4,
@@ -45,6 +46,12 @@ export default function GenerateCard({
         borderRadius: "0",
         overflow: "visible",
         maxHeight: "none",
+      },
+      filter: (domNode) => {
+        if (domNode instanceof HTMLElement && domNode.tagName === "SCRIPT") {
+          return false;
+        }
+        return true;
       },
     });
     if (!blob) return;
