@@ -33,7 +33,9 @@ export default function UserInfo({
       <Avatar src={userProfileData.avatarUrl} alt={userProfileData.username} />
 
       <div className="space-y-1">
-        <h3 className="font-bold text-lg">{userProfileData.username}</h3>
+        <h3 className="font-bold text-lg">
+          {userProfileData.name || userProfileData.username}
+        </h3>
 
         <div className="flex flex-wrap items-center text-sm text-muted-foreground gap-x-0.5">
           {USER_INFO_CONFIG.map((stat) => (
