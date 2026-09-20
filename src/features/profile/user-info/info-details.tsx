@@ -16,7 +16,7 @@ export default function Information({
 
       <div className="flex flex-col">
         <h1 className="text-[17px] font-semibold text-foreground leading-tight">
-          {profile.name}
+          {profile.name || profile.username}
         </h1>
         <p className="text-xs text-muted-foreground mt-1">
           {profile.location || "Unknown Location"}
