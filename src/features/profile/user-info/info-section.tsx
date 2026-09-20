@@ -1,4 +1,4 @@
-import Info from "@/features/profile/profile-section/info";
+import Info from "@/features/profile/user-info/info-details";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 import type { ProfileDetails } from "@/queries/profile";

@@ -1,7 +1,7 @@
 "use client";
 
 import ReposSection from "@/features/profile/repos-section/repos-section";
-import ProfileSection from "@/features/profile/profile-section/profile-section";
+import ProfileSection from "@/features/profile/user-info/profile-section";
 import UserProfileLoading from "@/features/profile/user-profile-loading";
 import { Separator } from "@/components/base/separator";
 import { notFound } from "next/navigation";

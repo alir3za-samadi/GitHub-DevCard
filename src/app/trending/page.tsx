@@ -1,5 +1,5 @@
 import PageHeader from "@/components/ui/page-header";
-import TrendingRepositories from "@/features/trending/trending-repositories";
+import TrendingRepositories from "@/features/trending/trending-repos";
 import { TOP_LANGUAGES, DAYS_AGE } from "@/queries/common/constants";
 import { isValidLanguage } from "@/queries/trending";
 import { prefetchTrendingRepos } from "@/queries/trending";

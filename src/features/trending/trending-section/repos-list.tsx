@@ -1,7 +1,7 @@
 "use client";
 
-import Repo from "@/features/trending/trending-section/repo";
-import TrendingReposPaginationControls from "@/features/trending/trending-section/trending-repos-pagination-controls";
+import Repo from "@/features/trending/trending-section/repo-card";
+import TrendingReposPaginationControls from "@/features/trending/trending-section/trending-repos-pagination";
 import { useSearchParams } from "next/navigation";
 import type { TrendingRepos, Language } from "@/queries/trending";
 

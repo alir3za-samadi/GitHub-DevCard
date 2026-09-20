@@ -2,9 +2,9 @@
 
 import PageHeader from "@/components/ui/page-header";
 import FilterSection from "@/features/trending/trending-section/filter-section";
-import ReposSection from "@/features/trending/trending-section/repos-section";
+import ReposSection from "@/features/trending/trending-section/repos-list";
 import GenerateCard from "@/components/ui/generate-card";
-import TrendingRepositoriesLoading from "@/features/trending/trending-repositories-loading";
+import TrendingRepositoriesLoading from "@/features/trending/trending-repos-loading";
 import { useTrending } from "@/queries/trending";
 import { DAYS_AGE } from "@/queries/common/constants";
 import type { Language } from "@/queries/trending";

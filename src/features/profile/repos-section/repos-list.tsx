@@ -1,4 +1,4 @@
-import Repo from "@/features/profile/repos-section/repo";
+import Repo from "@/features/profile/repos-section/repo-card";
 import type { ReactNode } from "react";
 import type { ProfileRepos } from "@/queries/profile/types";
 

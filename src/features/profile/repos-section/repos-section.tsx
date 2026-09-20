@@ -4,7 +4,7 @@ import { useState } from "react";
 import ReposSort from "@/features/profile/repos-section/repos-sort";
 import ReposExport from "@/features/profile/repos-section/repos-export";
 import ReposList from "@/features/profile/repos-section/repos-list";
-import ReposPaginationControls from "@/features/profile/repos-section/repos-pagination-controls";
+import ReposPaginationControls from "@/features/profile/repos-section/repos-pagination";
 import { isValidSortBy, sortRepos } from "@/lib/utils";
 import type { SortOptionsValue } from "@/lib/types";
 import type { ProfileRepos } from "@/queries/profile/types";

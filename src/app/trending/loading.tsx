@@ -18,24 +18,24 @@ export default function Loading() {
 function PageHeaderSkeleton() {
   return (
     <div className="space-y-2">
-      <Skeleton className="h-9 w-3/4 max-w-md mx-auto" />
+      <Skeleton className="h-18 w-3/4 md:h-9 md:w-130 mx-auto" />
     </div>
   );
 }
 
 function SortSectionSkeleton() {
   return (
-    <>
+    <div className="flex justify-between">
       <div className="hidden md:flex items-center gap-2">
         {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} className="h-9 w-24 rounded-md" />
+          <Skeleton key={i} className="h-9 w-20 rounded-md" />
         ))}
       </div>
 
-      <div className="md:hidden">
-        <Skeleton className="h-9 w-40 rounded-md" />
+      <div className="">
+        <Skeleton className="h-9 w-32 rounded-md" />
       </div>
-    </>
+    </div>
   );
 }
 

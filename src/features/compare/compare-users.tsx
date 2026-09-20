@@ -1,9 +1,9 @@
 "use client";
 
 import CompareUsersLoading from "@/features/compare/compare-users-loading";
-import CompareForm from "@/features/compare/compare-form/compare-form";
-import UserInfo from "@/features/compare/compare-section/user-info";
-import HeadToHead from "@/features/compare/compare-section/head-to-head";
+import CompareForm from "@/features/compare/compare-form";
+import UserInfo from "@/features/compare/compare-details/user-info";
+import HeadToHead from "@/features/compare/compare-details/head-to-head";
 import GenerateCard from "@/components/ui/generate-card";
 import { Separator } from "@/components/base/separator";
 import { Swords } from "lucide-react";
