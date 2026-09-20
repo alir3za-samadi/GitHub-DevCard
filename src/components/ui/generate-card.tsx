@@ -52,7 +52,7 @@ export default function GenerateCard({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
 
-    link.download = `${cardName || "github"}-card.png`;
+    link.download = `${cardName || "github"} Card.png`;
     link.href = url;
 
     document.body.appendChild(link);
