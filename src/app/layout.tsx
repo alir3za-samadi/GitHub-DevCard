@@ -43,6 +43,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <Footer />
         </AppProviders>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = { supportsMono: true };`,
+          }}
+        />
       </body>
     </html>
   );
