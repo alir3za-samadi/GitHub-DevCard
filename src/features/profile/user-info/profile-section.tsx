@@ -16,7 +16,7 @@ export default function ProfileSection({
   return (
     <>
       <InfoSection profile={profile}>
-        <GenerateCard cardName={profile?.name}>
+        <GenerateCard cardName={profile?.name || profile?.username}>
           <InfoSection
             profile={profile}
             className="flex-col sm:flex-row gap-4 items-start sm:items-center"

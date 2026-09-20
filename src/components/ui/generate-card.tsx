@@ -23,7 +23,6 @@ import { Download, Share2, Copy, Check, Send } from "lucide-react";
 export default function GenerateCard({
   cardName,
   triggerClassName,
-
   children,
 }: {
   cardName?: string | null;

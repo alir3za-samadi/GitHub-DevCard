@@ -56,7 +56,10 @@ export default function CompareUsers({
             <Separator />
 
             <div className="flex justify-center">
-              <GenerateCard triggerClassName="w-full text-sm">
+              <GenerateCard
+                triggerClassName="w-full text-sm"
+                cardName={`${profileA?.name || profileA?.username} VS ${profileB?.name || profileB?.username}`}
+              >
                 <div className="flex flex-col gap-4 md:flex-row">
                   <UserInfo userProfileData={profileA} />
                   <Swords
