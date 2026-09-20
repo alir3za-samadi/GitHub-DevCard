@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import type { ProfileDetails } from "@/queries/profile";
 import Avatar from "@/components/ui/avatar";
 
