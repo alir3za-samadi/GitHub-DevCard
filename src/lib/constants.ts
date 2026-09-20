@@ -10,3 +10,9 @@ export const NAV_ITEMS = [
   { href: "/compare", label: "Compare", icon: GitCompare },
   { href: "/trending", label: "Trending", icon: TrendingUp },
 ] as const;
+
+export const INTL_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});

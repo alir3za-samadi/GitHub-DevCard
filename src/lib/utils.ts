@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { SORT_OPTIONS } from "@/lib/constants";
+import { INTL_FORMATTER, SORT_OPTIONS } from "@/lib/constants";
 
 import type { SortOptionsValue } from "@/lib/types";
 import type { ProfileRepos } from "@/queries/profile/types";
@@ -13,11 +13,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(date);
+  return INTL_FORMATTER.format(date);
 }
 
 export function sortRepos(repos: ProfileRepos, sortBy: SortOptionsValue) {
