@@ -20,13 +20,13 @@ const PRESET_COMPARE_USERS = [
 ] as const;
 
 export default function CompareForm({
-  usernameA,
-  usernameB,
+  userA,
+  userB,
   errorA,
   errorB,
 }: {
-  usernameA: string;
-  usernameB: string;
+  userA: string;
+  userB: string;
   errorA?: string | null;
   errorB?: string | null;
 }) {
@@ -40,14 +40,14 @@ export default function CompareForm({
 
     if (!inputA || !inputB) return;
 
-    const query = `?usernameA=${encodeURIComponent(inputA)}&usernameB=${encodeURIComponent(inputB)}`;
+    const query = `?uA=${encodeURIComponent(inputA)}&uB=${encodeURIComponent(inputB)}`;
     router.push(query);
   }
 
   return (
     <div className="flex flex-col items-center gap-4">
       <form
-        key={`${usernameA}-${usernameB}`}
+        key={`${userA}-${userB}`}
         onSubmit={handleCompare}
         className="flex flex-col w-full items-center gap-4"
       >
@@ -56,7 +56,7 @@ export default function CompareForm({
             <Input
               name="inputA"
               placeholder="First username (torvalds)"
-              defaultValue={usernameA}
+              defaultValue={userA}
               aria-invalid={!!errorA}
               required
             />
@@ -80,7 +80,7 @@ export default function CompareForm({
             <Input
               name="inputB"
               placeholder="Second username (gaearon)"
-              defaultValue={usernameB}
+              defaultValue={userB}
               aria-invalid={!!errorB}
               required
             />
@@ -102,8 +102,8 @@ export default function CompareForm({
         Try:
         {PRESET_COMPARE_USERS.map((user, index) => {
           const [partA, partB] = user.split("vs");
-          const usernameA = partA.trim();
-          const usernameB = partB.trim();
+          const userA = partA.trim();
+          const userB = partB.trim();
 
           return (
             <span key={user} className="">
@@ -111,7 +111,7 @@ export default function CompareForm({
                 <TooltipTrigger
                   render={
                     <Link
-                      href={`/compare?usernameA=${usernameA}&usernameB=${usernameB}`}
+                      href={`/compare?uA=${userA}&uB=${userB}`}
                       className="text-foreground"
                       scroll={false}
                     />

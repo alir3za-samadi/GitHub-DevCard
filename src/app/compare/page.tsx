@@ -7,18 +7,18 @@ import type { Metadata } from "next";
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{ usernameA?: string; usernameB?: string }>;
+  searchParams: Promise<{ userA?: string; userB?: string }>;
 }): Promise<Metadata> {
-  const { usernameA = "", usernameB = "" } = await searchParams;
+  const { userA = "", userB = "" } = await searchParams;
 
-  const hasUsers = Boolean(usernameA && usernameB);
+  const hasUsers = Boolean(userA && userB);
 
   const title = hasUsers
-    ? `Compare ${usernameA} vs ${usernameB} | DevCard`
+    ? `Compare ${userA} vs ${userB} | DevCard`
     : "Compare GitHub Profiles | DevCard";
 
   const description = hasUsers
-    ? `Head-to-head GitHub profile comparison between ${usernameA} and ${usernameB}.`
+    ? `Head-to-head GitHub profile comparison between ${userA} and ${userB}.`
     : "Compare two GitHub developer profiles side-by-side with DevCard.";
 
   return {
@@ -32,18 +32,16 @@ export async function generateMetadata({
 export default async function ComparePage({
   searchParams,
 }: {
-  searchParams: Promise<{ usernameA?: string; usernameB?: string }>;
+  searchParams: Promise<{ uA?: string; uB?: string }>;
 }) {
-  const { usernameA = "", usernameB = "" } = await searchParams;
+  const { uA: userA = "", uB: userB = "" } = await searchParams;
 
   const pageTitle =
-    usernameA && usernameB
-      ? `Compare ${usernameA} vs ${usernameB}`
-      : "Compare GitHub Profiles";
+    userA && userB ? `Compare ${userA} vs ${userB}` : "Compare GitHub Profiles";
 
   const [queryClient] = await Promise.all([
-    prefetchProfileDetails(usernameA),
-    prefetchProfileDetails(usernameB),
+    prefetchProfileDetails(userA),
+    prefetchProfileDetails(userB),
   ]);
 
   return (
@@ -51,7 +49,7 @@ export default async function ComparePage({
       <PageHeader title={pageTitle} />
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <CompareUsers usernameA={usernameA} usernameB={usernameB} />
+        <CompareUsers userA={userA} userB={userB} />
       </HydrationBoundary>
     </div>
   );

@@ -10,14 +10,14 @@ import { Swords } from "lucide-react";
 import { useProfile } from "@/queries/profile";
 
 export default function CompareUsers({
-  usernameA,
-  usernameB,
+  userA,
+  userB,
 }: {
-  usernameA: string;
-  usernameB: string;
+  userA: string;
+  userB: string;
 }) {
-  const profileDataA = useProfile(usernameA || "");
-  const profileDataB = useProfile(usernameB || "");
+  const profileDataA = useProfile(userA || "");
+  const profileDataB = useProfile(userB || "");
 
   const {
     profile: profileA,
@@ -32,20 +32,16 @@ export default function CompareUsers({
   } = profileDataB;
 
   const isLoading =
-    (usernameA ? isLoadingA && !isNotFoundA : false) ||
-    (usernameB ? isLoadingB && !isNotFoundB : false);
+    (userA ? isLoadingA && !isNotFoundA : false) ||
+    (userB ? isLoadingB && !isNotFoundB : false);
 
   return (
     <div className="w-full space-y-6">
       <CompareForm
-        usernameA={usernameA}
-        usernameB={usernameB}
-        errorA={
-          usernameA && isNotFoundA ? `User "${usernameA}" not found` : null
-        }
-        errorB={
-          usernameB && isNotFoundB ? `User "${usernameB}" not found` : null
-        }
+        userA={userA}
+        userB={userB}
+        errorA={userA && isNotFoundA ? `User "${userA}" not found` : null}
+        errorB={userB && isNotFoundB ? `User "${userB}" not found` : null}
       />
 
       {isLoading ? (
