@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       >
         <Providers>
           <Navbar />
-          <main className="flex flex-1 w-full flex-col items-center justify-between py-2 sm:items-start mx-auto md:px-24 md:py-8">
+          <main className="flex flex-1 relative w-full flex-col items-center justify-between py-2 mx-auto sm:items-start md:px-24 md:py-8">
             {children}
           </main>
           <Footer />
