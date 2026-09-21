@@ -33,20 +33,20 @@ function CompareFormSkeleton() {
       <div className="flex flex-col w-full gap-2 px-4 pt-8 border rounded-xl bg-card items-center md:items-start md:flex-row lg:gap-4">
         <div className="flex-1 w-full space-y-2">
           <Skeleton className="h-9 w-full rounded-md" />
-          <div className="h-2 mb-1 md:min-h-4" />
+          <div className="h-2 mb-1 md:min-h-2" />
         </div>
 
-        <Skeleton className="h-5 w-5 shrink-0 my-2 rounded-full" />
+        <Skeleton className="h-5 w-5 shrink-0 my-1 rounded-full" />
 
         <div className="flex-1 w-full space-y-2">
           <div className="min-h-2 md:hidden" />
           <Skeleton className="h-9 w-full rounded-md" />
-          <div className="h-2 mb-1 md:min-h-4" />
+          <div className="h-2 mb-1 md:min-h-2" />
         </div>
       </div>
 
       <Skeleton className="h-8 w-full min-w-30 md:w-28 rounded-md" />
-      <Skeleton className="h-5 w-90 rounded-md" />
+      <Skeleton className="h-5 w-75 rounded-md md:w-90" />
     </div>
   );
 }
