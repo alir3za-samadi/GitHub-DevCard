@@ -88,12 +88,20 @@ function RepoSectionSkeleton() {
 
       <div className="flex flex-col items-center gap-4">
         <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: 9 }).map((_, i) => (
             <RepoCardSkeleton key={i} />
           ))}
         </div>
 
-        <Skeleton className="h-4 w-48 mt-2" />
+        <Skeleton className="h-4 w-52 my-1" />
+
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-6 w-20 rounded-md" />
+          <Skeleton className="h-6 w-8 rounded-md" />
+          <Skeleton className="h-6 w-8 rounded-md" />
+          <Skeleton className="h-6 w-8 rounded-md" />
+          <Skeleton className="h-6 w-20 rounded-md" />
+        </div>
       </div>
     </div>
   );
@@ -102,8 +110,8 @@ function RepoSectionSkeleton() {
 function RepoCardSkeleton() {
   return (
     <Card className="w-full">
-      <CardContent className="px-4 flex flex-col h-21 justify-between py-4">
-        <Skeleton className="h-5 w-3/4" />
+      <CardContent className="px-4 flex flex-col h-21 gap-8">
+        <Skeleton className="min-h-3 w-3/4" />
         <div className="flex flex-col gap-2">
           <Skeleton className="h-3 w-1/2" />
           <Skeleton className="h-3 w-1/3" />

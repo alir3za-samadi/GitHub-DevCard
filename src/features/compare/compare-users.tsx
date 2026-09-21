@@ -43,18 +43,16 @@ export default function CompareUsers({
         errorA={userA && isNotFoundA ? `User "${userA}" not found` : null}
         errorB={userB && isNotFoundB ? `User "${userB}" not found` : null}
       />
+      <Separator />
 
       {isLoading ? (
         <>
-          <Separator />
           <CompareUsersLoading />
         </>
       ) : (
         profileA &&
         profileB && (
           <>
-            <Separator />
-
             <div className="flex justify-center">
               <GenerateCard
                 triggerClassName="w-full text-sm"

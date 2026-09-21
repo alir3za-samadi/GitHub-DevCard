@@ -1,4 +1,4 @@
-import Repo from "@/features/profile/repos-section/repo-card";
+import RepoCard from "@/features/profile/repos-section/repo-card";
 import type { ReactNode } from "react";
 import type { ProfileRepos } from "@/queries/profile/types";
 
@@ -19,7 +19,7 @@ export default function ReposList({
     <div className="flex flex-col items-center gap-4">
       <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
         {repos.map((repo) => (
-          <Repo repo={repo} key={repo.id} />
+          <RepoCard repo={repo} key={repo.id} />
         ))}
       </div>
 

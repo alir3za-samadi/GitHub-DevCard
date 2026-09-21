@@ -8,6 +8,8 @@ export default function Loading() {
         <Skeleton className="h-8 w-85" />
       </div>
 
+      <Separator />
+
       <CompareFormSkeleton />
 
       <Separator />
@@ -30,21 +32,21 @@ function CompareFormSkeleton() {
     <div className="flex flex-col items-center gap-4 w-full">
       <div className="flex flex-col w-full gap-2 px-4 pt-8 border rounded-xl bg-card items-center md:items-start md:flex-row lg:gap-4">
         <div className="flex-1 w-full space-y-2">
-          <Skeleton className="h-10 w-full rounded-md" />
-          <div className="min-h-2 mb-1 md:min-h-5" />
+          <Skeleton className="h-9 w-full rounded-md" />
+          <div className="h-2 mb-1 md:min-h-4" />
         </div>
 
         <Skeleton className="h-5 w-5 shrink-0 my-2 rounded-full" />
 
         <div className="flex-1 w-full space-y-2">
           <div className="min-h-2 md:hidden" />
-          <Skeleton className="h-10 w-full rounded-md" />
-          <div className="min-h-2 mb-1 md:min-h-5" />
+          <Skeleton className="h-9 w-full rounded-md" />
+          <div className="h-2 mb-1 md:min-h-4" />
         </div>
       </div>
 
-      <Skeleton className="h-10 w-full min-w-30 md:w-28 rounded-md" />
-      <Skeleton className="h-4 w-48 rounded-md" />
+      <Skeleton className="h-8 w-full min-w-30 md:w-28 rounded-md" />
+      <Skeleton className="h-5 w-90 rounded-md" />
     </div>
   );
 }

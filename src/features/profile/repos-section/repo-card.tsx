@@ -8,7 +8,7 @@ import {
 import { ExternalLink } from "lucide-react";
 import type { ProfileRepoItem } from "@/queries/profile/types";
 
-export default function Repo({
+export default function RepoCard({
   repo,
   className,
 }: {
