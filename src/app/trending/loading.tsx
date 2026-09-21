@@ -65,10 +65,13 @@ function ReposSectionSkeleton() {
       <Skeleton className="h-4 w-52 my-1" />
 
       <div className="flex items-center gap-2">
-        <Skeleton className="h-9 w-24 rounded-md" />
-        <Skeleton className="h-9 w-9 rounded-md" />
-        <Skeleton className="h-9 w-9 rounded-md" />
-        <Skeleton className="h-9 w-24 rounded-md" />
+        <Skeleton className="h-6 w-20 rounded-md" />
+        <Skeleton className="h-6 w-8 rounded-md" />
+        <Skeleton className="h-6 w-8 rounded-md" />
+        <Skeleton className="h-6 w-8 rounded-md" />
+        <Skeleton className="h-6 w-8 rounded-md" />
+        <Skeleton className="h-6 w-8 rounded-md" />
+        <Skeleton className="h-6 w-20 rounded-md" />
       </div>
     </div>
   );
