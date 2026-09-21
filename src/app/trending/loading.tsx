@@ -25,10 +25,10 @@ function PageHeaderSkeleton() {
 
 function SortSectionSkeleton() {
   return (
-    <div className="flex justify-between">
-      <div className="hidden md:flex items-center gap-2">
+    <div className="flex items-center justify-between ">
+      <div className="hidden w-2/3 md:flex md:flex-wrap items-center gap-2">
         {Array.from({ length: 6 }).map((_, i) => (
-          <Skeleton key={i} className="h-9 w-20 rounded-md" />
+          <Skeleton key={i} className="h-9 w-18 rounded-md" />
         ))}
       </div>
 
