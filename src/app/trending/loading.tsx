@@ -18,7 +18,7 @@ export default function Loading() {
 function PageHeaderSkeleton() {
   return (
     <div className="space-y-2">
-      <Skeleton className="h-18 w-3/4 md:h-9 md:w-130 mx-auto" />
+      <Skeleton className="h-15 w-3/4 md:h-8 md:w-130 mx-auto" />
     </div>
   );
 }
@@ -32,9 +32,9 @@ function SortSectionSkeleton() {
         ))}
       </div>
 
-      <div className="">
-        <Skeleton className="h-9 w-32 rounded-md" />
-      </div>
+      <Skeleton className="h-9 w-28 rounded-md md:hidden" />
+
+      <Skeleton className="h-9 w-30 rounded-md" />
     </div>
   );
 }

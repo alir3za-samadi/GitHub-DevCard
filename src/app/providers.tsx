@@ -7,7 +7,7 @@ import { type ReactNode } from "react";
 import { TooltipProvider } from "@/components/base/tooltip";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 
-export default function AppProviders({ children }: { children: ReactNode }) {
+export default function Providers({ children }: { children: ReactNode }) {
   const queryClient = getQueryClient();
 
   return (
