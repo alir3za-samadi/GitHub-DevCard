@@ -6,10 +6,10 @@ export const PRESET_PROFILE_USERS = [
   "sindresorhus",
 ] as const;
 
-  export const PRESET_COMPARE_USERS = [
-    { uA: "torvalds", uB: "gaearon" },
-    { uA: "gaearon", uB: "sindresorhus" },
-  ] as const;
+export const PRESET_COMPARE_USERS = [
+  { uA: "torvalds", uB: "gaearon" },
+  { uA: "gaearon", uB: "sindresorhus" },
+] as const;
 
 export const SORT_OPTIONS = [
   { label: "Recently Updated", value: "updated" },
