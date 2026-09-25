@@ -1,5 +1,16 @@
 import { GitCompare, TrendingUp } from "lucide-react";
 
+export const PRESET_PROFILE_USERS = [
+  "torvalds",
+  "gaearon",
+  "sindresorhus",
+] as const;
+
+  export const PRESET_COMPARE_USERS = [
+    { uA: "torvalds", uB: "gaearon" },
+    { uA: "gaearon", uB: "sindresorhus" },
+  ] as const;
+
 export const SORT_OPTIONS = [
   { label: "Recently Updated", value: "updated" },
   { label: "Most Stars", value: "stars" },

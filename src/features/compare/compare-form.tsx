@@ -10,14 +10,10 @@ import {
   TooltipContent,
 } from "@/components/base/tooltip";
 import { Swords } from "lucide-react";
-
-import { type SubmitEvent } from "react";
+import { PRESET_COMPARE_USERS } from "@/lib/constants";
 import Link from "next/link";
 
-const PRESET_COMPARE_USERS = [
-  "torvalds vs gaearon",
-  "gaearon vs sindresorhus",
-] as const;
+import type { SubmitEvent } from "react";
 
 export default function CompareForm({
   userA,
@@ -101,12 +97,12 @@ export default function CompareForm({
       <p className="flex gap-1 items-center text-[13px] text-muted-foreground md:text-base">
         Try:
         {PRESET_COMPARE_USERS.map((user, index) => {
-          const [partA, partB] = user.split("vs");
-          const userA = partA.trim();
-          const userB = partB.trim();
+          const userA = user.uA;
+          const userB = user.uB;
+          const title = `${userA} vs ${userB}`;
 
           return (
-            <span key={user} className="">
+            <span key={title} className="">
               <Tooltip>
                 <TooltipTrigger
                   render={
@@ -117,7 +113,7 @@ export default function CompareForm({
                     />
                   }
                 >
-                  {user}
+                  {title}
                 </TooltipTrigger>
 
                 <TooltipContent side={"bottom"}>
@@ -125,7 +121,7 @@ export default function CompareForm({
                 </TooltipContent>
               </Tooltip>
 
-              <span key={user} className="">
+              <span>
                 {" "}
                 {index < PRESET_COMPARE_USERS.length - 1 && <span>·</span>}
               </span>

@@ -1,8 +1,11 @@
 import PageHeader from "@/components/ui/page-header";
 import UserProfile from "@/features/profile/user-profile";
+import { PRESET_PROFILE_USERS } from "@/lib/constants";
 import { prefetchProfile } from "@/queries/profile";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import type { Metadata } from "next";
+
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,
@@ -20,6 +23,10 @@ export async function generateMetadata({
     openGraph: { title, description, type: "website" },
     twitter: { card: "summary_large_image", title, description },
   };
+}
+
+export async function generateStaticParams() {
+  return PRESET_PROFILE_USERS.map((username) => ({ username: username }));
 }
 
 export default async function Profile({

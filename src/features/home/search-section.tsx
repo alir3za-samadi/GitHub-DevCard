@@ -10,9 +10,8 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/base/tooltip";
+import { PRESET_PROFILE_USERS } from "@/lib/constants";
 import Link from "next/link";
-
-const PRESET_USERS = ["torvalds", "gaearon", "sindresorhus"] as const;
 
 export default function SearchSection() {
   const [username, setUsername] = useState("");
@@ -52,7 +51,7 @@ export default function SearchSection() {
       <div className="flex flex-col gap-1 items-center text-muted-foreground sm:flex-row">
         Try:
         <div className="text-sm sm:text-base">
-          {PRESET_USERS.map((user, index) => {
+          {PRESET_PROFILE_USERS.map((user, index) => {
             return (
               <span key={user} className="">
                 <Tooltip>
@@ -73,7 +72,7 @@ export default function SearchSection() {
                 </Tooltip>
 
                 <span key={user} className="">
-                  {index < PRESET_USERS.length - 1 && <span> · </span>}
+                  {index < PRESET_PROFILE_USERS.length - 1 && <span> · </span>}
                 </span>
               </span>
             );
