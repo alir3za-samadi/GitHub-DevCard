@@ -40,7 +40,7 @@ export function useTrendingRepos(language: string, daysAgo: number = 30) {
   const validLanguage = !language || isValidLanguage(language);
 
   return useQuery({
-    queryKey: trendingKeys.repos(language, daysAgo),
+    queryKey: trendingKeys.repos({ language, daysAgo }),
     queryFn: () => fetchTrendingRepos(language, daysAgo),
     enabled: validLanguage,
     staleTime: 1000 * 60 * 60,
